@@ -1,0 +1,27 @@
+/*
+*	Biblioteca padrão da linguagem X
+*	
+*	Arquivos:
+*	
+*	+	erro.bx
+*	+	funcionalidades.bx
+*	+	objetos.bx
+*/
+
+/**
+*	Arquivo: erro.bx
+*	Declara as classes básicas de disparo de exceções
+*/
+Incluir: @"erro.bx";
+
+/**
+*	Arquivo: funcionalidades.bx
+*	Declara as funções padrão da linguagem X
+*/
+Incluir: @"funcionalidades.bx";
+
+/**
+*	Arquivo: objetos.bx
+*	Declara os objetos padrão da linguagem X
+*/
+Incluir: @"objetos.bx";

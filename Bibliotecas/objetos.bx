@@ -1,0 +1,387 @@
+/*
+*	Biblioteca padrão da linguagem X
+*	
+*	Objetos:
+*	
+*	+	Tecla:	Classe Anônima
+*	+	Numero: Classe Anônima
+*	+	Vetor:	Classe Anônima
+*/
+
+/**
+*	Objeto: Tecla
+*	Classe: Classe Anônima
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ ler()
+*		+ pressionada()
+*/
+
+Objeto: Tecla = novo Classe{
+	
+	/**
+	*	Método: ler
+	*	Parâmetros:
+	*		Não possui parâmetros
+	*	Retorno: Inteiro
+	*	Descrição: Esse método pausa a execução da aplicação em console até que haja uma entrada pelo teclado.
+	*	Quando uma tecla é pressionada, essa é lida imediatamente e seu código é retornado para a aplicação.
+	*/
+	
+	ler()
+	{
+		retornar: funcionalidade_interna(6);
+	}
+	
+	/**
+	*	Método: pressionada
+	*	Parâmetros:
+	*		Não possui parâmetros
+	*	Retorno: Logico
+	*	Descrição: Esse método verifica se há uma tecla pressionada em modo console.
+	*	Se houver uma tecla no buffer, o retorno será verdadeiro, em caso contrário, será falso.
+	*	A entrada armazenada no buffer não será lida ou retirada do buffer por esse método.
+	*/
+	
+	pressionada()
+	{
+		retornar: funcionalidade_interna(7);
+	}
+	
+	/*
+	*	Códigos de teclas especiais do teclado
+	*/
+	
+	/*
+	// SO: Linux (início)
+	// Descomente este trecho se seu sistema operacional for Linux
+	
+	// Código da tecla ESC
+	ESC()
+	{retornar: 27;}
+	
+	// Código da tecla ENTER
+	ENTER()
+	{retornar: 10;}
+	
+	// Código da tecla BACKSPACE
+	BACKSPACE()
+	{retornar: 127;}
+	
+	// Código da tecla TAB
+	TAB()
+	{retornar: 9;}
+	
+	// Código da tecla SPACE
+	SPACE()
+	{retornar: 32;}
+	
+	// Código da tecla INSERT
+	INSERT()
+	{retornar: 126;}
+	
+	// Código da tecla DELETE
+	DELETE()
+	{retornar: 169;}
+	
+	// Código da tecla HOME
+	HOME()
+	{retornar: 178;}
+	
+	// Código da tecla END
+	END()
+	{retornar: 176;}
+	
+	// Código da tecla PAGE UP
+	PAGE_UP()
+	{retornar: 171;}
+	
+	// Código da tecla PAGE DOWN
+	PAGE_DOWN()
+	{retornar: 172;}
+	
+	// Código da tecla direcional acima
+	SETA_ACIMA()
+	{retornar: 183;}
+	
+	// Código da tecla direcional abaixo
+	SETA_ABAIXO()
+	{retornar: 184;}
+	
+	// Código da tecla direcional esquerda
+	SETA_ESQUERDA()
+	{retornar: 186;}
+	
+	// Código da tecla direcional direita
+	SETA_DIREITA()
+	{retornar: 185;}
+	
+	// SO: Linux (fim)
+	*/
+	
+	/*
+	// SO: Windows (início)
+	// Descomente este trecho se seu sistema operacional for Windows
+	
+	// Código da tecla ESC
+	ESC()
+	{retornar: 27;}
+	
+	// Código da tecla ENTER
+	ENTER()
+	{retornar: 13;}
+	
+	// Código da tecla BACKSPACE
+	BACKSPACE()
+	{retornar: 8;}
+	
+	// Código da tecla TAB
+	TAB()
+	{retornar: 9;}
+	
+	// Código da tecla SPACE
+	SPACE()
+	{retornar: 32;}
+	
+	// Código da tecla INSERT
+	INSERT()
+	{retornar: 301;}
+	
+	// Código da tecla DELETE
+	DELETE()
+	{retornar: 302;}
+	
+	// Código da tecla HOME
+	HOME()
+	{retornar: 292;}
+	
+	// Código da tecla END
+	END()
+	{retornar: 291;}
+	
+	// Código da tecla PAGE UP
+	PAGE_UP()
+	{retornar: 289;}
+	
+	// Código da tecla PAGE DOWN
+	PAGE_DOWN()
+	{retornar: 290;}
+	
+	// Código da tecla direcional acima
+	SETA_ACIMA()
+	{retornar: 294;}
+	
+	// Código da tecla direcional abaixo
+	SETA_ABAIXO()
+	{retornar: 296;}
+	
+	// Código da tecla direcional esquerda
+	SETA_ESQUERDA()
+	{retornar: 293;}
+	
+	// Código da tecla direcional direita
+	SETA_DIREITA()
+	{retornar: 295;}
+	
+	// SO: Windows (Fim)
+	*/
+}();
+
+/**
+*	Objeto: Numero
+*	Classe: Classe Anônima
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ aleatorio({Real}Real[]: arg)
+*		+ converter(Texto: valor)
+*/
+
+Objeto: Numero = novo Classe{
+	
+	/**
+	*	Método: aleatorio
+	*	Parâmetros:
+	*		@ arg: Real{} - parâmetros variáveis que determinam o funcionamento do método
+	*	Retorno: Real
+	*	Descrição: Esse método retorna um valor aleatório.
+	*	Seu funcionamento está relacionado ao número de argumentos:
+	*		1 argumento: corresponde ao valor limite do retorno.
+	*		Não há casas decimais.
+	*		2 argumentos: correspondem aos valores inicial e limite do retorno.
+	*		Não há casas decimais.
+	*		3 argumentos: correspondem aos valores inicial e limite do retorno
+	*		e a quantidade máxima de casas decimais
+	*/
+	
+	aleatorio({Real}Real[]: arg)
+	{
+		se(arg.tamanho == 0)
+		{
+			retornar: funcionalidade_interna(8, 0, 10000, 0);
+		}
+		
+		Real: ret;
+		
+		se(arg.tamanho == 1)
+		{
+			ret = funcionalidade_interna(8, 0, arg[0], 0);
+		}
+		se(arg.tamanho == 2)
+		{
+			ret = funcionalidade_interna(8, arg[0], arg[1], 0);
+		}
+		se(arg.tamanho == 3)
+		{
+			ret = funcionalidade_interna(8, arg[0], arg[1], arg[2]);
+		}
+		
+		arg.liberar();
+		retornar: ret;
+	}
+	
+	/**
+	*	Método: converter
+	*	Parâmetro:
+	*		@ valor: Texto - cadeia de caracteres correspondente a um valor numérico
+	*	Retorno: Real
+	*	Descrição: Esse método converte uma cadeia de caracteres em um valor real e o retorna à aplicação.
+	*	Se a cadeia de caracteres não corresponder a um valor numérico, será disparada uma exceção.
+	*/
+	
+	converter(Texto: valor)
+	{
+		se(!funcionalidade_interna(9, valor))
+			disparar: novo ErroConversao("Impossível converter \"" << valor << "\" em Real");
+		retornar: funcionalidade_interna(10, valor);
+	}
+}();
+
+/**
+*	Objeto: Vetor
+*	Classe: Classe Anônima
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ caractere({Caractere}Caractere[]: vetor)
+*		+ logico({Logico}Logico[]: vetor)
+*		+ inteiro({Inteiro}Inteiro[]: vetor)
+*		+ real({Real}Real[]: vetor)
+*		+ texto({Texto}Texto[]: vetor)
+*		+ arquivo({Arquivo}Arquivo[]: vetor)
+*		+ objeto({Objeto}Objeto[]: vetor)
+*/
+
+Objeto: Vetor = novo Classe{
+	
+	/**
+	*	Método: caractere
+	*	Parâmetro:
+	*		@ vetor: Caractere{} - caracteres que irão compor o vetor
+	*	Retorno: Caractere[]
+	*	Descrição: Esse método converte uma lista de argumentos em um vetor do tipo Caractere
+	*/
+	
+	caractere({Caractere}Caractere[]: vetor)
+	{
+		retornar: vetor;
+	}
+	
+	/**
+	*	Método: logico
+	*	Parâmetro:
+	*		@ vetor: Logico{} - valores lógicos que irão compor o vetor
+	*	Retorno: Logico[]
+	*	Descrição: Esse método converte uma lista de argumentos em um vetor do tipo Logico
+	*/
+	
+	logico({Logico}Logico[]: vetor)
+	{
+		retornar: vetor;
+	}
+	
+	/**
+	*	Método: inteiro
+	*	Parâmetro:
+	*		@ vetor: Inteiro{} - valores inteiros que irão compor o vetor
+	*	Retorno: Inteiro[]
+	*	Descrição: Esse método converte uma lista de argumentos em um vetor do tipo Inteiro
+	*/
+	
+	inteiro({Inteiro}Inteiro[]: vetor)
+	{
+		retornar: vetor;
+	}
+	
+	/**
+	*	Método: real
+	*	Parâmetro:
+	*		@ vetor: Real{} - valores reais que irão compor o vetor
+	*	Retorno: Real[]
+	*	Descrição: Esse método converte uma lista de argumentos em um vetor do tipo Real
+	*/
+	
+	real({Real}Real[]: vetor)
+	{
+		retornar: vetor;
+	}
+	
+	/**
+	*	Método: texto
+	*	Parâmetro:
+	*		@ vetor: Texto{} - textos que irão compor o vetor
+	*	Retorno: Texto[]
+	*	Descrição: Esse método converte uma lista de argumentos em um vetor do tipo Texto
+	*/
+	
+	texto({Texto}Texto[]: vetor)
+	{
+		retornar: vetor;
+	}
+	
+	/**
+	*	Método: arquivo
+	*	Parâmetro:
+	*		@ vetor: Arquivo{} - arquivos que irão compor o vetor
+	*	Retorno: Arquivo[]
+	*	Descrição: Esse método converte uma lista de argumentos em um vetor do tipo Arquivo
+	*/
+	
+	arquivo({Arquivo}Arquivo[]: vetor)
+	{
+		retornar: vetor;
+	}
+	
+	/**
+	*	Método: objeto
+	*	Parâmetro:
+	*		@ vetor: Objeto{} - objetos que irão compor o vetor
+	*	Retorno: Objeto[]
+	*	Descrição: Esse método converte uma lista de argumentos em um vetor do tipo Objeto
+	*/
+	
+	objeto({Objeto}Objeto[]: vetor)
+	{
+		retornar: vetor;
+	}
+	
+	/**
+	*	Método: nulo
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Vetor nulo
+	*	Descrição: Retorna um vetor nulo comparável a qualquer tipo de vetor
+	*/
+	
+	nulo()
+	{
+		retornar: funcionalidade_interna(11);
+	}
+}();

@@ -1,0 +1,439 @@
+/*
+*	Biblioteca padrão da linguagem X
+*	
+*	Classes:
+*	
+*	+	Erro
+*	+	ErroEstouroVetor
+*	+	ErroPonteiroNulo
+*	+	ErroAritmetico
+*	+	ErroConversao
+*	+	ErroArquivo
+*	+	ErroArgumento
+*/
+
+/**
+*	Classe: Erro
+*	Classe base: Não há superclasse
+*	
+*	Atributos:
+*		- mensagem: Texto
+*	
+*	construtor(mensagem: Texto)
+*	destrutor() - Não implementado (destrutor padrão)
+*	
+*	Métodos:
+*		+ mensagem(): Texto
+*		+ exibir(): Vazio
+*	
+*	Descrição: Classe base para disparo e tratamento de exceções
+*/
+
+Classe: Erro
+{
+	Privado:
+		/**
+		*	Atributo: mensagem
+		*	Tipo: Texto
+		*	Descrição: Armazena a mensagem de erro da instância
+		*/
+		Texto: mensagem;
+	
+	Publico:
+		/**
+		*	Construtor
+		*	Parâmetro
+		*		@ mensagem: Texto - mensagem de erro da instância
+		*	Descrição: Define o valor de mensagem na criação da instância
+		*/
+		construtor(Texto: mensagem)
+		{
+			este.mensagem = mensagem;
+		}
+		
+		/**
+		*	Método: mensagem
+		*	Parâmetros:
+		*		Não há parâmetros
+		*	Retorno: Texto
+		*	Descrição: retorna o valor do atributo mensagem
+		*/
+		
+		mensagem()
+		{
+			retornar: este.mensagem;
+		}
+		
+		/**
+		*	Método: exibir
+		*	Parâmetros:
+		*		Não há parâmetros
+		*	Retorno: Vazio
+		*	Descrição: exibe a mensagem de erro na saída padrão do console
+		*/
+		
+		exibir()
+		{
+			Tela.escreverLinha(virtual.mensagem());
+		}
+}
+
+/**
+*	Classe: ErroPonteiroNulo
+*	Classe base: Erro
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ mensagem(): Texto
+*	
+*	Descrição: Classe utilizada para disparar exceções de acesso a referências nulas
+*/
+
+Classe: ErroPonteiroNulo
+{
+	Herdar: Erro;
+	
+	/**
+	*	Construtor
+	*	Parâmetro:
+	*		@ mensagem: Texto - mensagem de erro da instância
+	*	Descrição: Chama o construtor da classe base com o argumento recebido
+	*/
+	
+	construtor(Texto: mensagem)
+	{
+		base(mensagem);
+	}
+	
+	/**
+	*	Método: mensagem (sobrescrita)
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Texto
+	*	Descrição: retorna a mensagem "Erro de acesso a referência nula" mais o atributo mensagem
+	*/
+	
+	mensagem()
+	{
+		retornar: "Erro de acesso a referência nula\n" << base.mensagem();
+	}
+}
+
+/**
+*	Classe: ErroEstouroVetor
+*	Classe base: Erro
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ mensagem(): Texto
+*	
+*	Descrição: Classe utilizada para disparar exceções de estouro de vetor
+*/
+
+Classe: ErroEstouroVetor
+{
+	Herdar: Erro;
+	
+	/**
+	*	Construtor
+	*	Parâmetro:
+	*		@ mensagem: Texto - mensagem de erro da instância
+	*	Descrição: Chama o construtor da classe base com o argumento recebido
+	*/
+	
+	construtor(Texto: mensagem)
+	{
+		base(mensagem);
+	}
+	
+	/**
+	*	Método: mensagem (sobrescrita)
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Texto
+	*	Descrição: retorna a mensagem "Erro de estouro de vetor" mais o atributo mensagem
+	*/
+	
+	mensagem()
+	{
+		retornar: "Erro de estouro de vetor\n" << base.mensagem();
+	}
+}
+
+/**
+*	Classe: ErroAritmetico
+*	Classe base: Erro
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ mensagem(): Texto
+*	
+*	Descrição: Classe utilizada para disparar exceções de erros aritmeticos
+*/
+
+Classe: ErroAritmetico
+{
+	Herdar: Erro;
+	
+	/**
+	*	Construtor
+	*	Parâmetro:
+	*		@ mensagem: Texto - mensagem de erro da instância
+	*	Descrição: Chama o construtor da classe base com o argumento recebido
+	*/
+	
+	construtor(Texto: mensagem)
+	{
+		base(mensagem);
+	}
+	
+	/**
+	*	Método: mensagem (sobrescrita)
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Texto
+	*	Descrição: retorna a mensagem "Erro de operação aritmética" mais o atributo mensagem
+	*/
+	
+	mensagem()
+	{
+		retornar: "Erro de operação aritmética\n" << base.mensagem();
+	}
+}
+
+/**
+*	Classe: ErroConversao
+*	Classe base: Erro
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ mensagem(): Texto
+*	
+*	Descrição: Classe utilizada para disparar exceções de conversões numéricas
+*/
+
+Classe: ErroConversao
+{
+	Herdar: Erro;
+	
+	/**
+	*	Construtor
+	*	Parâmetro:
+	*		@ mensagem: Texto - mensagem de erro da instância
+	*	Descrição: Chama o construtor da classe base com o argumento recebido
+	*/
+	
+	construtor(Texto: mensagem)
+	{
+		base(mensagem);
+	}
+	
+	/**
+	*	Método: mensagem (sobrescrita)
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Texto
+	*	Descrição: retorna a mensagem "Erro de conversão" mais o atributo mensagem
+	*/
+	
+	mensagem()
+	{
+		retornar: "Erro de conversão\n" << base.mensagem();
+	}
+}
+
+/**
+*	Classe: ErroArquivo
+*	Classe base: Erro
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ mensagem(): Texto
+*	
+*	Descrição: Classe utilizada para disparar exceções de tratamento de arquivos
+*/
+
+Classe: ErroArquivo
+{
+	Herdar: Erro;
+	
+	/**
+	*	Construtor
+	*	Parâmetro:
+	*		@ mensagem: Texto - mensagem de erro da instância
+	*	Descrição: Chama o construtor da classe base com o argumento recebido
+	*/
+	
+	construtor(Texto: mensagem)
+	{
+		base(mensagem);
+	}
+	
+	/**
+	*	Método: mensagem (sobrescrita)
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Texto
+	*	Descrição: retorna a mensagem "Erro de tratamento de arquivo" mais o atributo mensagem
+	*/
+	
+	mensagem()
+	{
+		retornar: "Erro de tratamento de arquivo\n" << base.mensagem();
+	}
+}
+
+/**
+*	Classe: ErroArgumento
+*	Classe base: Erro
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ mensagem(): Texto
+*	
+*	Descrição: Classe utilizada para disparar exceções de argumentos
+*/
+
+Classe: ErroArgumento
+{
+	Herdar: Erro;
+	
+	/**
+	*	Construtor
+	*	Parâmetro:
+	*		@ mensagem: Texto - mensagem de erro da instância
+	*	Descrição: Chama o construtor da classe base com o argumento recebido
+	*/
+	
+	construtor(Texto: mensagem)
+	{
+		base(mensagem);
+	}
+	
+	/**
+	*	Método: mensagem (sobrescrita)
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Texto
+	*	Descrição: retorna a mensagem "Erro de tratamento de arquivo" mais o atributo mensagem
+	*/
+	
+	mensagem()
+	{
+		retornar: "Erro de argumento\n" << base.mensagem();
+	}
+}
+
+/**
+*	Classe: TratadorDeErros
+*	Classe base: Não há superclasse
+*	
+*	Atributos:
+*		Não há atributos
+*	
+*	Métodos:
+*		+ erro_ponteiro_nulo(): Vazio
+*		+ erro_indice_vetor_invalido(): Vazio
+*		+ erro_divisao_por_zero(): Vazio
+*		+ erro_raiz_invalida(): Vazio
+*		+ detectado(Inteiro: cod_erro): Vazio
+*	
+*	Descrição: Classe utilizada tratar erros detectados em tempo de execução pela máquina virtual
+*/
+
+Classe: TratadorDeErros
+{
+	/**
+	*	Método: erro_ponteiro_nulo
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Vazio
+	*	Descrição: dispara uma exceção do tipo ErroPonteiroNulo
+	*/
+	
+	erro_ponteiro_nulo()
+	{
+		disparar: novo ErroPonteiroNulo("Impossível acessar elemento de referência nula");
+	}
+	
+	/**
+	*	Método: erro_indice_vetor_invalido
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Vazio
+	*	Descrição: dispara uma exceção do tipo ErroEstouroVetor
+	*/
+	
+	erro_indice_vetor_invalido()
+	{
+		disparar: novo ErroEstouroVetor("Índice inválido para o vetor");
+	}
+	
+	/**
+	*	Método: erro_divisao_por_zero
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Vazio
+	*	Descrição: dispara uma exceção do tipo ErroAritmetico
+	*/
+	
+	erro_divisao_por_zero()
+	{
+		disparar: novo ErroAritmetico("Impossível dividir por 0 (zero)");
+	}
+	
+	/**
+	*	Método: erro_raiz_invalida
+	*	Parâmetros:
+	*		Não há parâmetros
+	*	Retorno: Vazio
+	*	Descrição: dispara uma exceção do tipo ErroAritmetico
+	*/
+	
+	erro_raiz_invalida()
+	{
+		disparar: novo ErroAritmetico("Não é possível encontrar raízes reais");
+	}
+	
+	/**
+	*	Método: detectado
+	*	Parâmetros:
+	*		@ cod_erro: Inteiro - Contém o código do erro passado pela máquina virtual
+	*	Retorno: Vazio
+	*	Descrição: identifica o erro e chama o método para tratamento.
+	*/
+	
+	erro_detectado(Inteiro: cod_erro)
+	{
+		se(cod_erro == 0)
+			virtual.erro_ponteiro_nulo();
+		se(cod_erro == 1)
+			virtual.erro_indice_vetor_invalido();
+		se(cod_erro == 2)
+			virtual.erro_divisao_por_zero();
+		se(cod_erro == 3)
+			virtual.erro_raiz_invalida();
+	}
+}
+
+/**
+*	Objeto: erro
+*	Classe: TratadorDeErros
+*	
+*	Descrição: Objeto padrão reconhecido pela máquina virtual para
+*	tratamento de erros detectados em tempo de execução.
+*/
+
+Objeto: __objeto_reservado__ = novo TratadorDeErros();

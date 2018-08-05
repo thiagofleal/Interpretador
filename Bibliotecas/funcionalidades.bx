@@ -1,0 +1,183 @@
+/*
+*	Biblioteca padrão da linguagem X
+*	
+*	Funções:
+*	
+*	+	Abrir(Texto: arquivo, Texto: modo)
+*	+	Comando(Texto: cmd)
+*	+	Cores(Inteiro: texto, Inteiro: fundo)
+*	+	Esperar(Inteiro: mseg)
+*	+	Posicionar(Inteiro: x, Inteiro: y)
+*	+	Sair({Inteiro}Inteiro[]: valor)
+*	+	caractere(Caractere: valor)
+*	+	inteiro(Inteiro: valor)
+*	+	real(Real: valor)
+*	+	texto(Caractere[]: valor)
+*/
+
+/**
+*	Função: Abrir
+*	Parâmetros:
+*		@ arquivo: Texto - contém o endereço url do arquivo
+*		@ modo: Texto - contém o especificador de modo de abertura do arquivo. Pode ser:
+*			* "l": modo de leitura
+*			* "e": modo de escrita (apaga o conteúdo anterior)
+*			* "a": modo de escrita (acrescenta novo conteúdo ao final do arquivo)
+*	Retorno: Arquivo
+*	Descrição: Essa função deve abrir uma comunicação de dados com o arquivo especificado e no modo especificado,
+*	e deverá ser retornado um ponteiro Arquivo para a aplicação.
+*/
+
+Abrir(Texto: arquivo, Texto: modo)
+{
+	se(modo.caractere(0) == 'l')
+	{
+		modo = "r";
+	}
+	se(modo.caractere(0) == 'e')
+	{
+		modo = "w";
+	}
+	
+	Arquivo: ret = funcionalidade_interna(0, arquivo, modo);
+	
+	se(ret == Nulo)
+	{
+		disparar: novo ErroArquivo("Impossível abrir o arquivo \"" << arquivo << "\"");
+	}
+	
+	retornar: ret;
+}
+
+/**
+*	Função: Comando
+*	Parâmetro:
+*		@ cmd: Texto - contém um comando a ser enviado ao sistema operacional
+*	Retorno: Inteiro
+*	Descrição: Essa função deve receber um comando em formato de texto e enviá-lo ao sistema operacional.
+*	O retorno da função será um valor inteiro devolvido pelo sistema operacional.
+*/
+
+Comando(Texto: cmd)
+{
+	retornar: funcionalidade_interna(1, cmd);
+}
+
+/**
+*	Função: Cores
+*	Parâmetros:
+*		@ texto: Inteiro - Contém o valor da cor a ser aplicada ao texto
+*		@ fundo: Inteiro - Contém o valor da cor a ser aplicada ao fundo
+*	Retorno: Vazio
+*	Descrição: Essa função altera a cor do texto e do fundo do console.
+*/
+
+Cores(Inteiro: texto, Inteiro: fundo)
+{
+	funcionalidade_interna(2, texto, fundo);
+}
+
+/**
+*	Função: Esperar
+*	Parâmetro:
+*		@ mseg: Inteiro - valor em milésimos de segundos
+*	Retorno: Vazio
+*	Descrição: Essa função pausa a execução da aplicação em console durante o tempo solicitado em milissegundos.
+*/
+
+Esperar(Inteiro: mseg)
+{
+	funcionalidade_interna(3, mseg);
+}
+
+/**
+*	Função: Posicionar
+*	Parâmetros:
+*		@ x - valor da coordenada no eixo das abicissas
+*		@ y - valor da coordenada no eixo das ordenadas
+*	Retorno: Vazio
+*	Descrição: Essa função posiciona o cursor do console nas coordenadas passadas como argumento.
+*/
+
+Posicionar(Inteiro: x, Inteiro: y)
+{
+	funcionalidade_interna(4, x, y);
+}
+
+/**
+*	Função: Sair
+*	Parâmetros:
+*		@ valor: Inteiro{} - valor opcional de retorno ao sistema operacional
+*	Retorno: Não há retorno
+*	Descrição: Essa função interrompe imediatamente a execução da aplicação. O valor de retorno
+*	ao sistema operacional pode ser passado como argumento, sendo esse opcional, e o valor
+*	de retorno padrão é 0.
+*/
+
+Sair({Inteiro}Inteiro[]: valor)
+{
+	se(valor.tamanho == 1)
+	{
+		funcionalidade_interna(5, valor[0]);
+	}
+	funcionalidade_interna(5, 0);
+}
+
+/**
+*	Função: caractere
+*	Parâmetros:
+*		@ valor: Caractere - valor a ser convertido para Caractere
+*	Retorno: Caractere
+*	Descrição: Essa função converte um valor numérico em Caractere
+*/
+
+caractere(Caractere: valor)
+{
+	retornar: valor;
+}
+
+/**
+*	Função: inteiro
+*	Parâmetros:
+*		@ valor: Inteiro - valor a ser convertido para Inteiro
+*	Retorno: Inteiro
+*	Descrição: Essa função converte um valor numérico em Inteiro
+*/
+
+inteiro(Inteiro: valor)
+{
+	retornar: valor;
+}
+
+/**
+*	Função: real
+*	Parâmetros:
+*		@ valor: Real - valor a ser convertido para Real
+*	Retorno: Real
+*	Descrição: Essa função converte um valor numérico em Real
+*/
+
+real(Real: valor)
+{
+	retornar: valor;
+}
+
+/**
+*	Função: texto
+*	Parâmetros:
+*		@ valor: Caractere[] - vetor de caracteres a ser convertido para Texto
+*	Retorno: Texto
+*	Descrição: Essa função converte um vetor de caracteres em Texto
+*/
+
+texto(Caractere[]: valor)
+{
+	Texto: ret;
+	
+	para(Inteiro: i; i < valor.tamanho; i++)
+	{
+		ret = ret << valor[i];
+	}
+	
+	retornar: ret;
+}
