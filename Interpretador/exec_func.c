@@ -208,10 +208,13 @@ INLINE void alloc_parameters(int * n_prmt)
 void exec_func(Function * func)
 {
 	int n_arg;
+	Result bk_arg[num_arg];
 	
+	memcpy(bk_arg, _arg, sizeof bk_arg);
 	++ token;
 	n_arg = arguments();
 	func->ret_value = * redirect_program(func->enter, alloc_parameters, &n_arg);
+	memcpy(_arg, bk_arg, sizeof bk_arg);
 }
 
 struct prmt_meth{
@@ -229,10 +232,13 @@ void exec_method(Method * meth, str_Object * obj_this)
 {
 	static struct prmt_meth arg;
 	pointer bk_this = _this;
+	Result bk_arg[num_arg];
 	
+	memcpy(bk_arg, _arg, sizeof bk_arg);
 	++ token;
 	arg.n_prmt = arguments();
 	arg._this = obj_this;
 	meth->ret_value = * redirect_program(meth->enter, func_meth, &arg);
 	_this = bk_this;
+	memcpy(_arg, bk_arg, sizeof bk_arg);
 }

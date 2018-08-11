@@ -175,7 +175,11 @@ String format_string(const register String _format, Result *args, register int a
 
 bool methods_Arquivo(Result * r, int _meth_id)
 {
+	register int ret = true;
 	File file = r->value.rt_pointer;
+	Result bk_arg[num_arg];
+	
+	memcpy(bk_arg, _arg, sizeof bk_arg);
 	
 	if(_meth_id == method(escrever) || _meth_id == method(escreverLinha))
 	{
@@ -214,43 +218,33 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		r->value.rt_pointer = NULL;
 		
 		free(s);
-		return true;
 	}
-	
-	if(_meth_id == method(descarregar))
+	else if(_meth_id == method(descarregar))
 	{
 		expected_arguments(0, 0);
 		r->type = type_bool;
 		r->value.rt_bool = fflush(file) ? true : false;
-		return true;
 	}
-	
-	if(_meth_id == method(reiniciar))
+	else if(_meth_id == method(reiniciar))
 	{
 		expected_arguments(0, 0);
 		r->type = type_void;
 		r->value.rt_pointer = NULL;
 		rewind(file);
-		return true;
 	}
-	
-	if(_meth_id == method(fim))
+	else if(_meth_id == method(fim))
 	{
 		expected_arguments(0, 0);
 		r->type = type_bool;
 		r->value.rt_bool = feof(file) ? true : false;
-		return true;
 	}
-	
-	if(_meth_id == method(fechar))
+	else if(_meth_id == method(fechar))
 	{
 		expected_arguments(0, 0);
 		r->type = type_bool;
 		r->value.rt_bool = fclose(file) ? true : false;
-		return true;
 	}
-	
-	if(_meth_id == method(caractere))
+	else if(_meth_id == method(caractere))
 	{
 		char c;
 		
@@ -258,10 +252,8 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		fscanf(file, "%c", &c);
 		r->type = type_char;
 		r->value.rt_double = (double)c;
-		return true;
 	}
-	
-	if(_meth_id == method(inteiro))
+	else if(_meth_id == method(inteiro))
 	{
 		int i;
 		
@@ -269,10 +261,8 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		fscanf(file, "%i", &i);
 		r->type = type_real;
 		r->value.rt_double = (double)i;
-		return true;
 	}
-	
-	if(_meth_id == method(real))
+	else if(_meth_id == method(real))
 	{
 		double d;
 		
@@ -280,10 +270,8 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		fscanf(file, "%lf", &d);
 		r->type = type_real;
 		r->value.rt_double = d;
-		return true;
 	}
-	
-	if(_meth_id == method(palavra))
+	else if(_meth_id == method(palavra))
 	{
 		char s[301];
 		
@@ -291,10 +279,8 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		fscanf(file, "%s", s);
 		r->type = type_string;
 		r->value.rt_String = toString(s);
-		return true;
 	}
-	
-	if(_meth_id == method(linha))
+	else if(_meth_id == method(linha))
 	{
 		char s[1001];
 		
@@ -302,15 +288,23 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		fscanf(file, " %[^\n]s", s);
 		r->type = type_string;
 		r->value.rt_String = toString(s);
-		return true;
+	}
+	else
+	{
+		ret = false;
 	}
 	
-	return false;
+	memcpy(_arg, bk_arg, sizeof bk_arg);
+	return ret;
 }
 
 bool methods_Texto(Result * r, int _meth_id)
 {
+	register int ret = true;
 	String str = r->value.rt_String;
+	Result bk_arg[num_arg];
+	
+	memcpy(bk_arg, _arg, sizeof bk_arg);
 	
 	if(_meth_id == method(caractere))
 	{
@@ -330,10 +324,8 @@ bool methods_Texto(Result * r, int _meth_id)
 		}
 		
 		free(str);
-		return true;
 	}
-	
-	if(_meth_id == method(formatar))
+	else if(_meth_id == method(formatar))
 	{
 		register int nargs = expected_arguments(0, num_arg);
 		
@@ -341,23 +333,29 @@ bool methods_Texto(Result * r, int _meth_id)
 		r->value.rt_String = format_string(str, _arg, nargs);
 		
 		free(str);
-		return true;
 	}
-	
-	if(_meth_id == method(tamanho))
+	else if(_meth_id == method(tamanho))
 	{
 		r->type = type_real;
 		r->value.rt_double = (double)strlen(str);
 		free(str);
-		return true;
+	}
+	else
+	{
+		ret = false;
 	}
 	
-	return false;
+	memcpy(_arg, bk_arg, sizeof bk_arg);
+	return ret;
 }
 
 bool methods_Matriz(Result * r, int _meth_id)
 {
+	register bool ret = true;
 	str_matrix mtrx = r->value.rt_matrix;
+	Result bk_arg[num_arg];
+	
+	memcpy(bk_arg, _arg, sizeof bk_arg);
 	
 	if(_meth_id == method(liberar))
 	{
@@ -366,17 +364,19 @@ bool methods_Matriz(Result * r, int _meth_id)
 		
 		r->type = type_void;
 		r->value.rt_pointer = NULL;
-		return true;
 	}
-	
-	if(_meth_id == method(tamanho))
+	else if(_meth_id == method(tamanho))
 	{
 		r->type = type_real;
 		r->value.rt_double = (double)mtrx.length;
-		return true;
+	}
+	else
+	{
+		ret = false;
 	}
 	
-	return false;
+	memcpy(_arg, bk_arg, sizeof bk_arg);
+	return ret;
 }
 
 void delete_object(p_Object obj)

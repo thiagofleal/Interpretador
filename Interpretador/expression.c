@@ -466,9 +466,7 @@ static void expElement(Result *r)
 		{
 			int id;
 			String name, str_err = NULL;
-			Result bk_arg[num_arg];
-	
-			memcpy(bk_arg, _arg, sizeof bk_arg);
+			
 			++ token;
 			id = token->intern;
 			name = token->value;
@@ -521,8 +519,6 @@ static void expElement(Result *r)
 					}
 					break;
 			}
-			
-			memcpy(_arg, bk_arg, sizeof bk_arg);
 			
 			if(str_err)
 			{
@@ -715,7 +711,6 @@ static void expValue(Result *r)
 						p_Object obj;
 						
 						declare_class(&unknow_class);
-						
 						memcpy(id, _class + -- ind_class, sizeof(Class));
 						obj = instance_class(id);
 						
@@ -786,9 +781,7 @@ static void expValue(Result *r)
 			if(token->type == tok_pontuation && * token->value == '(')
 			{
 				Function *f;
-				Result bk_arg[num_arg];
 				
-				memcpy(bk_arg, _arg, sizeof bk_arg);
 				-- token;
 				f = find_func(token->intern);
 				
@@ -800,8 +793,6 @@ static void expValue(Result *r)
 				}
 				
 				exec_func(f);
-				memcpy(_arg, bk_arg, sizeof bk_arg);
-				
 				*r = f->ret_value;
 			}
 			else
