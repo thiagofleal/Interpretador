@@ -36,13 +36,13 @@ enum num_resources{
 	default_matrix_dimension = -1
 };
 
-enum{
+enum intern_types{
 	int_keyword = 1,
 	int_operator = 100,
 	int_identifier = 200
-}intern_types;
+};
 
-enum{
+enum key_word{
 	
 	kw_Caractere = int_keyword,
 	kw_Logico,
@@ -83,9 +83,9 @@ enum{
 	kw_virtual,
 	kw_base
 	
-}key_word;
+};
 
-enum{
+enum tok_type{
 	tok_operator,
 	tok_pontuation,
 	tok_constant,
@@ -94,9 +94,9 @@ enum{
 	tok_reserved,
 	tok_identifier,
 	tok_eof
-}tok_type;
+};
 
-typedef struct{
+typedef struct _Token{
 	int line;
 	String file;
 	String value;
@@ -104,7 +104,7 @@ typedef struct{
 	int intern;
 }Token;
 
-enum{
+enum result_type{
 	type_char,
 	type_bool,
 	type_int,
@@ -115,9 +115,9 @@ enum{
 	type_matrix,
 	type_null,
 	type_void
-}result_type;
+};
 
-enum{
+enum enum_operator{
 	
 	op_attr = int_operator,
 	op_incr,
@@ -161,9 +161,9 @@ enum{
 	
 	op_at
 	
-}enum_operator;
+};
 
-typedef struct{
+typedef struct _str_matrix{
 	pointer value;
 	int type;
 	size_t size;
@@ -171,7 +171,7 @@ typedef struct{
 	int length;
 }str_matrix;
 
-typedef union{
+typedef union _result_value{
 	bool rt_bool;
 	double rt_double;
 	String rt_String;
@@ -179,39 +179,39 @@ typedef union{
 	str_matrix rt_matrix;
 }result_value;
 
-typedef struct{
+typedef struct _Result{
 	int type;
 	result_value value;
 }Result;
 
 typedef Result (* std_function)(void);
 
-typedef struct{
+typedef struct _Variable{
 	unsigned int id;
 	int type;
 	pointer value;
 }Variable;
 
-typedef struct{
+typedef struct _Function{
 	unsigned int id;
 	Token *enter;
 	Result ret_value;
 }Function;
 
-enum{
+enum modifier{
 	mod_public,
 	mod_protected,
 	mod_private
-}modifier;
+};
 
-typedef struct{
+typedef struct _Attribute{
 	unsigned int id;
 	int type;
 	pointer value;
 	int mode;
 }Attribute;
 
-typedef struct{
+typedef struct _Method{
 	unsigned int id;
 	Token *enter;
 	Result ret_value;
@@ -236,17 +236,17 @@ typedef struct _str_Object{
 	Attribute * attr;
 }str_Object, *p_Object;
 
-typedef struct{
+typedef struct _str_variable{
 	int type;
 	size_t size;
 }str_variable;
 
-typedef struct{
+typedef struct _Except{
 	jmp_buf * p_jmp_buf;
 	p_Object thrown;
 }Except;
 
-enum{
+enum enum_meth_id{
 	meth_id_escrever,
 	meth_id_escreverLinha,
 	meth_id_descarregar,
@@ -266,11 +266,11 @@ enum{
 	meth_id_possui,
 	meth_id_pertence,
 	meth_id_number
-}enum_meth_id;
+};
 
-enum{
+enum enum_error{
 	null_pointer,
 	invalid_index,
 	division_by_zero,
 	negative_radix
-}enum_error;
+};
