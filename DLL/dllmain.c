@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <Tonight\tonight.h>
 #include <Tonight\list.h>
 #include "add_std_func.h"
@@ -117,7 +118,7 @@ Result func9(void)
 	
 	strtod(str, &p);
 	ret.type = type_bool;
-	ret.value.rt_bool = (bool)(!*p);
+	ret.value.rt_bool = *p ? false : true;
 	
 	return ret;
 }
@@ -146,6 +147,31 @@ Result func11(void)
 	return ret;
 }
 
+Result func12(void)
+{
+	Result ret;
+	pointer library;
+	
+	String arg1 = _arg[1].value.rt_String;
+	String arg2 = _arg[2].value.rt_String;
+	
+	Result (*func)(Result*);
+	
+	ret.type = type_object;
+	ret.value.rt_pointer = NULL;
+	
+	if(library = LoadLibrary(arg1))
+	{
+		if(*(pointer*)&func = GetProcAddress(library, arg2))
+		{
+			ret = func(_arg + 3);
+		}
+		FreeLibrary(library);
+	}
+	
+	return ret;
+}
+
 DLLIMPORT void set_arg(void *arg)
 {
 	_arg = arg;
@@ -167,4 +193,5 @@ DLLIMPORT void add_std_func(Object list)
 	iL.add(list, func9);
 	iL.add(list, func10);
 	iL.add(list, func11);
+	iL.add(list, func12);
 }

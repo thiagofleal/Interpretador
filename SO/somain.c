@@ -1,3 +1,4 @@
+#include <dlfcn.h>
 #include <Tonight/tonight.h>
 #include <Tonight/list.h>
 #include "add_std_func.h"
@@ -146,6 +147,32 @@ Result func11(void)
 	return ret;
 }
 
+Result func12(void)
+{
+	Result ret;
+	pointer library;
+	
+	String arg1 = _arg[1].value.rt_String;
+	String arg2 = _arg[2].value.rt_String;
+	
+	ret.type = type_null;
+	ret.value.rt_pointer = NULL;
+	
+	if((library = dlopen(arg1, RTLD_LAZY)))
+	{
+		Result (*func)(Result*);
+		
+		if(((*(pointer*)&func) = dlsym(library, arg2)))
+		{
+			ret = func(_arg + 3);
+		}
+		
+		dlclose(library);
+	}
+	
+	return ret;
+}
+
 void set_arg(void *arg)
 {
 	_arg = arg;
@@ -167,4 +194,5 @@ void add_std_func(Object list)
 	iL.add(list, func9);
 	iL.add(list, func10);
 	iL.add(list, func11);
+	iL.add(list, func12);
 }
