@@ -131,14 +131,6 @@ String throws open_file(String name)
 	return begin;
 }
 
-void alloc_pointer(String id, int type, pointer value)
-{
-	_var[ind_var].id = intern_identifier(id);
-	_var[ind_var].type = type;
-	_var[ind_var].value = new Pointer(value);
-	++ ind_var;
-}
-
 String get_library_path(String argv)
 {
 	int i, j;
@@ -176,9 +168,6 @@ int main(int argc, String argv[])
 		init_meth_id();
 		
 		unknow_class = (Token){0, interpreter_reference, "(anônima)", tok_identifier, intern_identifier("Anonimo")};
-		
-		alloc_pointer("Tela", type_file, stdout);
-		alloc_pointer("Teclado", type_file, stdin);
 		
 		default_constructor = tokenMaker(interpreter_reference, "construtor(){}");
 		default_destructor = tokenMaker(interpreter_reference, "destrutor(){}");

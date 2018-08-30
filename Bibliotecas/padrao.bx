@@ -51,6 +51,9 @@ Objeto: funcionalidadeInterna = novo Classe{
 	
 }();
 
+Arquivo: Teclado = funcionalidade_interna(funcionalidadeInterna.abrirArquivo(), 0);
+Arquivo: Tela = funcionalidade_interna(funcionalidadeInterna.abrirArquivo(), 1);
+
 /**
 *	Arquivo: erro.bx
 *	Declara as classes básicas de disparo de exceções

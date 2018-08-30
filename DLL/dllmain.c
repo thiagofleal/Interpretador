@@ -4,14 +4,36 @@
 #include "add_std_func.h"
 #include "header.h"
 
-P_void error_found;
+static P_void error_found = NULL;
 
 Result func0(Result *_arg, int numArgs)
 {
 	Result ret;
 	
 	ret.type = type_file;
-	ret.value.rt_pointer = fopen(_arg[0].value.rt_String, _arg[1].value.rt_String);
+	
+	if(numArgs == 1)
+	{
+		switch((int)_arg[0].value.rt_double)
+		{
+			case 0:
+				ret.value.rt_pointer = stdin;
+				break;
+			
+			case 1:
+				ret.value.rt_pointer = stdout;
+				break;
+			
+			case 2:
+				ret.value.rt_pointer = stderr;
+				break;
+		}
+	}
+	
+	if(numArgs == 2)
+	{
+		ret.value.rt_pointer = fopen(_arg[0].value.rt_String, _arg[1].value.rt_String);
+	}
 	
 	return ret;
 }
