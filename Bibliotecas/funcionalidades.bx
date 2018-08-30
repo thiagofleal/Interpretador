@@ -1,7 +1,7 @@
 /*
-*	Biblioteca padr√£o da linguagem X
+*	Biblioteca padr„o da linguagem X
 *	
-*	Fun√ß√µes:
+*	FunÁıes:
 *	
 *	+	Abrir(Texto: arquivo, Texto: modo)
 *	+	Comando(Texto: cmd)
@@ -16,16 +16,16 @@
 */
 
 /**
-*	Fun√ß√£o: Abrir
-*	Par√¢metros:
-*		@ arquivo: Texto - cont√©m o endere√ßo url do arquivo
-*		@ modo: Texto - cont√©m o especificador de modo de abertura do arquivo. Pode ser:
+*	FunÁ„o: Abrir
+*	Par‚metros:
+*		@ arquivo: Texto - contÈm o endereÁo url do arquivo
+*		@ modo: Texto - contÈm o especificador de modo de abertura do arquivo. Pode ser:
 *			* "l": modo de leitura
-*			* "e": modo de escrita (apaga o conte√∫do anterior)
-*			* "a": modo de escrita (acrescenta novo conte√∫do ao final do arquivo)
+*			* "e": modo de escrita (apaga o conte˙do anterior)
+*			* "a": modo de escrita (acrescenta novo conte˙do ao final do arquivo)
 *	Retorno: Arquivo
-*	Descri√ß√£o: Essa fun√ß√£o deve abrir uma comunica√ß√£o de dados com o arquivo especificado e no modo especificado,
-*	e dever√° ser retornado um ponteiro Arquivo para a aplica√ß√£o.
+*	DescriÁ„o: Essa funÁ„o deve abrir uma comunicaÁ„o de dados com o arquivo especificado e no modo especificado,
+*	e dever· ser retornado um ponteiro Arquivo para a aplicaÁ„o.
 */
 
 Abrir(Texto: arquivo, Texto: modo)
@@ -39,96 +39,96 @@ Abrir(Texto: arquivo, Texto: modo)
 		modo = "w";
 	}
 	
-	Arquivo: ret = funcionalidade_interna(0, arquivo, modo);
+	Arquivo: ret = funcionalidade_interna(funcionalidadeInterna.abrirArquivo(), arquivo, modo);
 	
 	se(ret == Nulo)
 	{
-		disparar: novo ErroArquivo("Imposs√≠vel abrir o arquivo \"" << arquivo << "\"");
+		disparar: novo ErroArquivo("ImpossÌvel abrir o arquivo \"" << arquivo << "\"");
 	}
 	
 	retornar: ret;
 }
 
 /**
-*	Fun√ß√£o: Comando
-*	Par√¢metro:
-*		@ cmd: Texto - cont√©m um comando a ser enviado ao sistema operacional
+*	FunÁ„o: Comando
+*	Par‚metro:
+*		@ cmd: Texto - contÈm um comando a ser enviado ao sistema operacional
 *	Retorno: Inteiro
-*	Descri√ß√£o: Essa fun√ß√£o deve receber um comando em formato de texto e envi√°-lo ao sistema operacional.
-*	O retorno da fun√ß√£o ser√° um valor inteiro devolvido pelo sistema operacional.
+*	DescriÁ„o: Essa funÁ„o deve receber um comando em formato de texto e envi·-lo ao sistema operacional.
+*	O retorno da funÁ„o ser· um valor inteiro devolvido pelo sistema operacional.
 */
 
 Comando(Texto: cmd)
 {
-	retornar: funcionalidade_interna(1, cmd);
+	retornar: funcionalidade_interna(funcionalidadeInterna.comando(), cmd);
 }
 
 /**
-*	Fun√ß√£o: Cores
-*	Par√¢metros:
-*		@ texto: Inteiro - Cont√©m o valor da cor a ser aplicada ao texto
-*		@ fundo: Inteiro - Cont√©m o valor da cor a ser aplicada ao fundo
+*	FunÁ„o: Cores
+*	Par‚metros:
+*		@ texto: Inteiro - ContÈm o valor da cor a ser aplicada ao texto
+*		@ fundo: Inteiro - ContÈm o valor da cor a ser aplicada ao fundo
 *	Retorno: Vazio
-*	Descri√ß√£o: Essa fun√ß√£o altera a cor do texto e do fundo do console.
+*	DescriÁ„o: Essa funÁ„o altera a cor do texto e do fundo do console.
 */
 
 Cores(Inteiro: texto, Inteiro: fundo)
 {
-	funcionalidade_interna(2, texto, fundo);
+	funcionalidade_interna(funcionalidadeInterna.cores(), texto, fundo);
 }
 
 /**
-*	Fun√ß√£o: Esperar
-*	Par√¢metro:
-*		@ mseg: Inteiro - valor em mil√©simos de segundos
+*	FunÁ„o: Esperar
+*	Par‚metro:
+*		@ mseg: Inteiro - valor em milÈsimos de segundos
 *	Retorno: Vazio
-*	Descri√ß√£o: Essa fun√ß√£o pausa a execu√ß√£o da aplica√ß√£o em console durante o tempo solicitado em milissegundos.
+*	DescriÁ„o: Essa funÁ„o pausa a execuÁ„o da aplicaÁ„o em console durante o tempo solicitado em milissegundos.
 */
 
 Esperar(Inteiro: mseg)
 {
-	funcionalidade_interna(3, mseg);
+	funcionalidade_interna(funcionalidadeInterna.esperar(), mseg);
 }
 
 /**
-*	Fun√ß√£o: Posicionar
-*	Par√¢metros:
+*	FunÁ„o: Posicionar
+*	Par‚metros:
 *		@ x - valor da coordenada no eixo das abicissas
 *		@ y - valor da coordenada no eixo das ordenadas
 *	Retorno: Vazio
-*	Descri√ß√£o: Essa fun√ß√£o posiciona o cursor do console nas coordenadas passadas como argumento.
+*	DescriÁ„o: Essa funÁ„o posiciona o cursor do console nas coordenadas passadas como argumento.
 */
 
 Posicionar(Inteiro: x, Inteiro: y)
 {
-	funcionalidade_interna(4, x, y);
+	funcionalidade_interna(funcionalidadeInterna.posicionar(), x, y);
 }
 
 /**
-*	Fun√ß√£o: Sair
-*	Par√¢metros:
+*	FunÁ„o: Sair
+*	Par‚metros:
 *		@ valor: Inteiro{} - valor opcional de retorno ao sistema operacional
-*	Retorno: N√£o h√° retorno
-*	Descri√ß√£o: Essa fun√ß√£o interrompe imediatamente a execu√ß√£o da aplica√ß√£o. O valor de retorno
+*	Retorno: N„o h· retorno
+*	DescriÁ„o: Essa funÁ„o interrompe imediatamente a execuÁ„o da aplicaÁ„o. O valor de retorno
 *	ao sistema operacional pode ser passado como argumento, sendo esse opcional, e o valor
-*	de retorno padr√£o √© 0.
+*	de retorno padr„o È 0.
 */
 
 Sair({Inteiro}Inteiro[]: valor)
 {
 	se(valor.tamanho == 1)
 	{
-		funcionalidade_interna(5, valor[0]);
+		funcionalidade_interna(funcionalidadeInterna.sair(), valor[0]);
 	}
-	funcionalidade_interna(5, 0);
+	funcionalidade_interna(funcionalidadeInterna.sair(), 0);
 }
 
 /**
-*	Fun√ß√£o: caractere
-*	Par√¢metros:
+*	FunÁ„o: caractere
+*	Par‚metros:
 *		@ valor: Caractere - valor a ser convertido para Caractere
 *	Retorno: Caractere
-*	Descri√ß√£o: Essa fun√ß√£o converte um valor num√©rico em Caractere
+*	DescriÁ„o: Essa funÁ„o converte um valor numÈrico em Caractere
 */
 
 caractere(Caractere: valor)
@@ -137,11 +137,11 @@ caractere(Caractere: valor)
 }
 
 /**
-*	Fun√ß√£o: inteiro
-*	Par√¢metros:
+*	FunÁ„o: inteiro
+*	Par‚metros:
 *		@ valor: Inteiro - valor a ser convertido para Inteiro
 *	Retorno: Inteiro
-*	Descri√ß√£o: Essa fun√ß√£o converte um valor num√©rico em Inteiro
+*	DescriÁ„o: Essa funÁ„o converte um valor numÈrico em Inteiro
 */
 
 inteiro(Inteiro: valor)
@@ -150,11 +150,11 @@ inteiro(Inteiro: valor)
 }
 
 /**
-*	Fun√ß√£o: real
-*	Par√¢metros:
+*	FunÁ„o: real
+*	Par‚metros:
 *		@ valor: Real - valor a ser convertido para Real
 *	Retorno: Real
-*	Descri√ß√£o: Essa fun√ß√£o converte um valor num√©rico em Real
+*	DescriÁ„o: Essa funÁ„o converte um valor numÈrico em Real
 */
 
 real(Real: valor)
@@ -163,11 +163,11 @@ real(Real: valor)
 }
 
 /**
-*	Fun√ß√£o: texto
-*	Par√¢metros:
+*	FunÁ„o: texto
+*	Par‚metros:
 *		@ valor: Caractere[] - vetor de caracteres a ser convertido para Texto
 *	Retorno: Texto
-*	Descri√ß√£o: Essa fun√ß√£o converte um vetor de caracteres em Texto
+*	DescriÁ„o: Essa funÁ„o converte um vetor de caracteres em Texto
 */
 
 texto(Caractere[]: valor)

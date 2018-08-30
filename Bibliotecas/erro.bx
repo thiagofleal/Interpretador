@@ -1,5 +1,5 @@
 /*
-*	Biblioteca padr√£o da linguagem X
+*	Biblioteca padr„o da linguagem X
 *	
 *	Classes:
 *	
@@ -9,24 +9,23 @@
 *	+	ErroAritmetico
 *	+	ErroConversao
 *	+	ErroArquivo
-*	+	ErroArgumento
 */
 
 /**
 *	Classe: Erro
-*	Classe base: N√£o h√° superclasse
+*	Classe base: N„o h· superclasse
 *	
 *	Atributos:
 *		- mensagem: Texto
 *	
 *	construtor(mensagem: Texto)
-*	destrutor() - N√£o implementado (destrutor padr√£o)
+*	destrutor() - N„o implementado (destrutor padr„o)
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ mensagem(): Texto
 *		+ exibir(): Vazio
 *	
-*	Descri√ß√£o: Classe base para disparo e tratamento de exce√ß√µes
+*	DescriÁ„o: Classe base para disparo e tratamento de exceÁıes
 */
 
 Classe: Erro
@@ -35,16 +34,16 @@ Classe: Erro
 		/**
 		*	Atributo: mensagem
 		*	Tipo: Texto
-		*	Descri√ß√£o: Armazena a mensagem de erro da inst√¢ncia
+		*	DescriÁ„o: Armazena a mensagem de erro da inst‚ncia
 		*/
 		Texto: mensagem;
 	
 	Publico:
 		/**
 		*	Construtor
-		*	Par√¢metro
-		*		@ mensagem: Texto - mensagem de erro da inst√¢ncia
-		*	Descri√ß√£o: Define o valor de mensagem na cria√ß√£o da inst√¢ncia
+		*	Par‚metro
+		*		@ mensagem: Texto - mensagem de erro da inst‚ncia
+		*	DescriÁ„o: Define o valor de mensagem na criaÁ„o da inst‚ncia
 		*/
 		construtor(Texto: mensagem)
 		{
@@ -52,11 +51,11 @@ Classe: Erro
 		}
 		
 		/**
-		*	M√©todo: mensagem
-		*	Par√¢metros:
-		*		N√£o h√° par√¢metros
+		*	MÈtodo: mensagem
+		*	Par‚metros:
+		*		N„o h· par‚metros
 		*	Retorno: Texto
-		*	Descri√ß√£o: retorna o valor do atributo mensagem
+		*	DescriÁ„o: retorna o valor do atributo mensagem
 		*/
 		
 		mensagem()
@@ -65,11 +64,11 @@ Classe: Erro
 		}
 		
 		/**
-		*	M√©todo: exibir
-		*	Par√¢metros:
-		*		N√£o h√° par√¢metros
+		*	MÈtodo: exibir
+		*	Par‚metros:
+		*		N„o h· par‚metros
 		*	Retorno: Vazio
-		*	Descri√ß√£o: exibe a mensagem de erro na sa√≠da padr√£o do console
+		*	DescriÁ„o: exibe a mensagem de erro na saÌda padr„o do console
 		*/
 		
 		exibir()
@@ -83,12 +82,12 @@ Classe: Erro
 *	Classe base: Erro
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ mensagem(): Texto
 *	
-*	Descri√ß√£o: Classe utilizada para disparar exce√ß√µes de acesso a refer√™ncias nulas
+*	DescriÁ„o: Classe utilizada para disparar exceÁıes de acesso a referÍncias nulas
 */
 
 Classe: ErroPonteiroNulo
@@ -97,9 +96,9 @@ Classe: ErroPonteiroNulo
 	
 	/**
 	*	Construtor
-	*	Par√¢metro:
-	*		@ mensagem: Texto - mensagem de erro da inst√¢ncia
-	*	Descri√ß√£o: Chama o construtor da classe base com o argumento recebido
+	*	Par‚metro:
+	*		@ mensagem: Texto - mensagem de erro da inst‚ncia
+	*	DescriÁ„o: Chama o construtor da classe base com o argumento recebido
 	*/
 	
 	construtor(Texto: mensagem)
@@ -108,16 +107,16 @@ Classe: ErroPonteiroNulo
 	}
 	
 	/**
-	*	M√©todo: mensagem (sobrescrita)
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: mensagem (sobrescrita)
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Texto
-	*	Descri√ß√£o: retorna a mensagem "Erro de acesso a refer√™ncia nula" mais o atributo mensagem
+	*	DescriÁ„o: retorna a mensagem "Erro de acesso a referÍncia nula" mais o atributo mensagem
 	*/
 	
 	mensagem()
 	{
-		retornar: "Erro de acesso a refer√™ncia nula\n" << base.mensagem();
+		retornar: "Erro de acesso a referÍncia nula\n" << base.mensagem();
 	}
 }
 
@@ -126,12 +125,12 @@ Classe: ErroPonteiroNulo
 *	Classe base: Erro
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ mensagem(): Texto
 *	
-*	Descri√ß√£o: Classe utilizada para disparar exce√ß√µes de estouro de vetor
+*	DescriÁ„o: Classe utilizada para disparar exceÁıes de estouro de vetor
 */
 
 Classe: ErroEstouroVetor
@@ -140,9 +139,9 @@ Classe: ErroEstouroVetor
 	
 	/**
 	*	Construtor
-	*	Par√¢metro:
-	*		@ mensagem: Texto - mensagem de erro da inst√¢ncia
-	*	Descri√ß√£o: Chama o construtor da classe base com o argumento recebido
+	*	Par‚metro:
+	*		@ mensagem: Texto - mensagem de erro da inst‚ncia
+	*	DescriÁ„o: Chama o construtor da classe base com o argumento recebido
 	*/
 	
 	construtor(Texto: mensagem)
@@ -151,11 +150,11 @@ Classe: ErroEstouroVetor
 	}
 	
 	/**
-	*	M√©todo: mensagem (sobrescrita)
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: mensagem (sobrescrita)
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Texto
-	*	Descri√ß√£o: retorna a mensagem "Erro de estouro de vetor" mais o atributo mensagem
+	*	DescriÁ„o: retorna a mensagem "Erro de estouro de vetor" mais o atributo mensagem
 	*/
 	
 	mensagem()
@@ -169,12 +168,12 @@ Classe: ErroEstouroVetor
 *	Classe base: Erro
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ mensagem(): Texto
 *	
-*	Descri√ß√£o: Classe utilizada para disparar exce√ß√µes de erros aritmeticos
+*	DescriÁ„o: Classe utilizada para disparar exceÁıes de erros aritmeticos
 */
 
 Classe: ErroAritmetico
@@ -183,9 +182,9 @@ Classe: ErroAritmetico
 	
 	/**
 	*	Construtor
-	*	Par√¢metro:
-	*		@ mensagem: Texto - mensagem de erro da inst√¢ncia
-	*	Descri√ß√£o: Chama o construtor da classe base com o argumento recebido
+	*	Par‚metro:
+	*		@ mensagem: Texto - mensagem de erro da inst‚ncia
+	*	DescriÁ„o: Chama o construtor da classe base com o argumento recebido
 	*/
 	
 	construtor(Texto: mensagem)
@@ -194,16 +193,16 @@ Classe: ErroAritmetico
 	}
 	
 	/**
-	*	M√©todo: mensagem (sobrescrita)
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: mensagem (sobrescrita)
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Texto
-	*	Descri√ß√£o: retorna a mensagem "Erro de opera√ß√£o aritm√©tica" mais o atributo mensagem
+	*	DescriÁ„o: retorna a mensagem "Erro de operaÁ„o aritmÈtica" mais o atributo mensagem
 	*/
 	
 	mensagem()
 	{
-		retornar: "Erro de opera√ß√£o aritm√©tica\n" << base.mensagem();
+		retornar: "Erro de operaÁ„o aritmÈtica\n" << base.mensagem();
 	}
 }
 
@@ -212,12 +211,12 @@ Classe: ErroAritmetico
 *	Classe base: Erro
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ mensagem(): Texto
 *	
-*	Descri√ß√£o: Classe utilizada para disparar exce√ß√µes de convers√µes num√©ricas
+*	DescriÁ„o: Classe utilizada para disparar exceÁıes de conversıes numÈricas
 */
 
 Classe: ErroConversao
@@ -226,9 +225,9 @@ Classe: ErroConversao
 	
 	/**
 	*	Construtor
-	*	Par√¢metro:
-	*		@ mensagem: Texto - mensagem de erro da inst√¢ncia
-	*	Descri√ß√£o: Chama o construtor da classe base com o argumento recebido
+	*	Par‚metro:
+	*		@ mensagem: Texto - mensagem de erro da inst‚ncia
+	*	DescriÁ„o: Chama o construtor da classe base com o argumento recebido
 	*/
 	
 	construtor(Texto: mensagem)
@@ -237,16 +236,16 @@ Classe: ErroConversao
 	}
 	
 	/**
-	*	M√©todo: mensagem (sobrescrita)
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: mensagem (sobrescrita)
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Texto
-	*	Descri√ß√£o: retorna a mensagem "Erro de convers√£o" mais o atributo mensagem
+	*	DescriÁ„o: retorna a mensagem "Erro de convers„o" mais o atributo mensagem
 	*/
 	
 	mensagem()
 	{
-		retornar: "Erro de convers√£o\n" << base.mensagem();
+		retornar: "Erro de convers„o\n" << base.mensagem();
 	}
 }
 
@@ -255,12 +254,12 @@ Classe: ErroConversao
 *	Classe base: Erro
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ mensagem(): Texto
 *	
-*	Descri√ß√£o: Classe utilizada para disparar exce√ß√µes de tratamento de arquivos
+*	DescriÁ„o: Classe utilizada para disparar exceÁıes de tratamento de arquivos
 */
 
 Classe: ErroArquivo
@@ -269,9 +268,9 @@ Classe: ErroArquivo
 	
 	/**
 	*	Construtor
-	*	Par√¢metro:
-	*		@ mensagem: Texto - mensagem de erro da inst√¢ncia
-	*	Descri√ß√£o: Chama o construtor da classe base com o argumento recebido
+	*	Par‚metro:
+	*		@ mensagem: Texto - mensagem de erro da inst‚ncia
+	*	DescriÁ„o: Chama o construtor da classe base com o argumento recebido
 	*/
 	
 	construtor(Texto: mensagem)
@@ -280,11 +279,11 @@ Classe: ErroArquivo
 	}
 	
 	/**
-	*	M√©todo: mensagem (sobrescrita)
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: mensagem (sobrescrita)
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Texto
-	*	Descri√ß√£o: retorna a mensagem "Erro de tratamento de arquivo" mais o atributo mensagem
+	*	DescriÁ„o: retorna a mensagem "Erro de tratamento de arquivo" mais o atributo mensagem
 	*/
 	
 	mensagem()
@@ -294,125 +293,82 @@ Classe: ErroArquivo
 }
 
 /**
-*	Classe: ErroArgumento
-*	Classe base: Erro
-*	
-*	Atributos:
-*		N√£o h√° atributos
-*	
-*	M√©todos:
-*		+ mensagem(): Texto
-*	
-*	Descri√ß√£o: Classe utilizada para disparar exce√ß√µes de argumentos
-*/
-
-Classe: ErroArgumento
-{
-	Herdar: Erro;
-	
-	/**
-	*	Construtor
-	*	Par√¢metro:
-	*		@ mensagem: Texto - mensagem de erro da inst√¢ncia
-	*	Descri√ß√£o: Chama o construtor da classe base com o argumento recebido
-	*/
-	
-	construtor(Texto: mensagem)
-	{
-		base(mensagem);
-	}
-	
-	/**
-	*	M√©todo: mensagem (sobrescrita)
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
-	*	Retorno: Texto
-	*	Descri√ß√£o: retorna a mensagem "Erro de tratamento de arquivo" mais o atributo mensagem
-	*/
-	
-	mensagem()
-	{
-		retornar: "Erro de argumento\n" << base.mensagem();
-	}
-}
-
-/**
 *	Classe: TratadorDeErros
-*	Classe base: N√£o h√° superclasse
+*	Classe base: N„o h· superclasse
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ erro_ponteiro_nulo(): Vazio
 *		+ erro_indice_vetor_invalido(): Vazio
 *		+ erro_divisao_por_zero(): Vazio
 *		+ erro_raiz_invalida(): Vazio
 *		+ detectado(Inteiro: cod_erro): Vazio
 *	
-*	Descri√ß√£o: Classe utilizada tratar erros detectados em tempo de execu√ß√£o pela m√°quina virtual
+*	DescriÁ„o: Classe utilizada tratar erros detectados em tempo de execuÁ„o pela m·quina virtual
 */
 
 Classe: TratadorDeErros
 {
 	/**
-	*	M√©todo: erro_ponteiro_nulo
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: erro_ponteiro_nulo
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Vazio
-	*	Descri√ß√£o: dispara uma exce√ß√£o do tipo ErroPonteiroNulo
+	*	DescriÁ„o: dispara uma exceÁ„o do tipo ErroPonteiroNulo
 	*/
 	
 	erro_ponteiro_nulo()
 	{
-		disparar: novo ErroPonteiroNulo("Imposs√≠vel acessar elemento de refer√™ncia nula");
+		disparar: novo ErroPonteiroNulo("ImpossÌvel acessar elemento de referÍncia nula");
 	}
 	
 	/**
-	*	M√©todo: erro_indice_vetor_invalido
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: erro_indice_vetor_invalido
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Vazio
-	*	Descri√ß√£o: dispara uma exce√ß√£o do tipo ErroEstouroVetor
+	*	DescriÁ„o: dispara uma exceÁ„o do tipo ErroEstouroVetor
 	*/
 	
 	erro_indice_vetor_invalido()
 	{
-		disparar: novo ErroEstouroVetor("√çndice inv√°lido para o vetor");
+		disparar: novo ErroEstouroVetor("Õndice inv·lido para o vetor");
 	}
 	
 	/**
-	*	M√©todo: erro_divisao_por_zero
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: erro_divisao_por_zero
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Vazio
-	*	Descri√ß√£o: dispara uma exce√ß√£o do tipo ErroAritmetico
+	*	DescriÁ„o: dispara uma exceÁ„o do tipo ErroAritmetico
 	*/
 	
 	erro_divisao_por_zero()
 	{
-		disparar: novo ErroAritmetico("Imposs√≠vel dividir por 0 (zero)");
+		disparar: novo ErroAritmetico("ImpossÌvel dividir por 0 (zero)");
 	}
 	
 	/**
-	*	M√©todo: erro_raiz_invalida
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: erro_raiz_invalida
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Vazio
-	*	Descri√ß√£o: dispara uma exce√ß√£o do tipo ErroAritmetico
+	*	DescriÁ„o: dispara uma exceÁ„o do tipo ErroAritmetico
 	*/
 	
 	erro_raiz_invalida()
 	{
-		disparar: novo ErroAritmetico("N√£o √© poss√≠vel encontrar ra√≠zes reais");
+		disparar: novo ErroAritmetico("N„o È possÌvel encontrar raÌzes reais");
 	}
 	
 	/**
-	*	M√©todo: detectado
-	*	Par√¢metros:
-	*		@ cod_erro: Inteiro - Cont√©m o c√≥digo do erro passado pela m√°quina virtual
+	*	MÈtodo: detectado
+	*	Par‚metros:
+	*		@ cod_erro: Inteiro - ContÈm o cÛdigo do erro passado pela m·quina virtual
 	*	Retorno: Vazio
-	*	Descri√ß√£o: identifica o erro e chama o m√©todo para tratamento.
+	*	DescriÁ„o: identifica o erro e chama o mÈtodo para tratamento.
 	*/
 	
 	erro_detectado(Inteiro: cod_erro)
@@ -432,8 +388,8 @@ Classe: TratadorDeErros
 *	Objeto: erro
 *	Classe: TratadorDeErros
 *	
-*	Descri√ß√£o: Objeto padr√£o reconhecido pela m√°quina virtual para
-*	tratamento de erros detectados em tempo de execu√ß√£o.
+*	DescriÁ„o: Objeto padr„o reconhecido pela m·quina virtual para
+*	tratamento de erros detectados em tempo de execuÁ„o.
 */
 
 Objeto: __objeto_reservado__ = novo TratadorDeErros();

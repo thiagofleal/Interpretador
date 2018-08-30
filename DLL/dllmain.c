@@ -4,22 +4,22 @@
 #include "add_std_func.h"
 #include "header.h"
 
-static Result *_arg;
+P_void error_found;
 
-Result func0(void)
+Result func0(Result *_arg, int numArgs)
 {
 	Result ret;
 	
 	ret.type = type_file;
-	ret.value.rt_pointer = fopen(_arg[1].value.rt_String, _arg[2].value.rt_String);
+	ret.value.rt_pointer = fopen(_arg[0].value.rt_String, _arg[1].value.rt_String);
 	
 	return ret;
 }
 
-Result func1(void)
+Result func1(Result *_arg, int numArgs)
 {
 	Result ret;
-	const String cmd = _arg[1].value.rt_String;
+	const String cmd = _arg[0].value.rt_String;
 	
 	ret.type = type_real;
 	ret.value.rt_double = (double)system(cmd);
@@ -27,7 +27,7 @@ Result func1(void)
 	return ret;
 }
 
-Result func2(void)
+Result func2(Result *_arg, int numArgs)
 {
 	Result ret;
 	static Painter paint;
@@ -36,45 +36,45 @@ Result func2(void)
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
-	paint.both((int)_arg[1].value.rt_double, (int)_arg[2].value.rt_double);
+	paint.both((int)_arg[0].value.rt_double, (int)_arg[1].value.rt_double);
 	
 	return ret;
 }
 
-Result func3(void)
+Result func3(Result *_arg, int numArgs)
 {
 	Result ret;
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
-	Tonight.sleep((unsigned int)_arg[1].value.rt_double);
+	Tonight.sleep((unsigned int)_arg[0].value.rt_double);
 	
 	return ret;
 }
 
-Result func4(void)
+Result func4(Result *_arg, int numArgs)
 {
 	Result ret;
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
-	Tonight.position((int)_arg[1].value.rt_double, (int)_arg[2].value.rt_double);
+	Tonight.position((int)_arg[0].value.rt_double, (int)_arg[1].value.rt_double);
 	
 	return ret;
 }
 
-Result func5(void)
+Result func5(Result *_arg, int numArgs)
 {
 	Result ret;
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
-	exit((int)_arg[1].value.rt_double);
+	exit((int)_arg[0].value.rt_double);
 	
 	return ret;
 }
 
-Result func6(void)
+Result func6(Result *_arg, int numArgs)
 {
 	Result ret;
 	
@@ -84,7 +84,7 @@ Result func6(void)
 	return ret;
 }
 
-Result func7(void)
+Result func7(Result *_arg, int numArgs)
 {
 	Result ret;
 	
@@ -94,14 +94,14 @@ Result func7(void)
 	return ret;
 }
 
-Result func8(void)
+Result func8(Result *_arg, int numArgs)
 {
 	Result ret;
 	static Random rand;
 	
-	double arg1 = _arg[1].value.rt_double;
-	double arg2 = _arg[2].value.rt_double;
-	int arg3 = (int)_arg[3].value.rt_double;
+	double arg1 = _arg[0].value.rt_double;
+	double arg2 = _arg[1].value.rt_double;
+	int arg3 = (int)_arg[2].value.rt_double;
 	
 	rand = new Random(Tonight.std.random.range);
 	
@@ -111,9 +111,9 @@ Result func8(void)
 	return ret;
 }
 
-Result func9(void)
+Result func9(Result *_arg, int numArgs)
 {
-	String str = _arg[1].value.rt_String, p;
+	String str = _arg[0].value.rt_String, p;
 	Result ret;
 	
 	strtod(str, &p);
@@ -123,17 +123,17 @@ Result func9(void)
 	return ret;
 }
 
-Result func10(void)
+Result func10(Result *_arg, int numArgs)
 {
 	Result ret;
 	
 	ret.type = type_real;
-	ret.value.rt_double = atof(_arg[1].value.rt_String);
+	ret.value.rt_double = atof(_arg[0].value.rt_String);
 	
 	return ret;
 }
 
-Result func11(void)
+Result func11(Result *_arg, int numArgs)
 {
 	Result ret;
 	
@@ -147,15 +147,15 @@ Result func11(void)
 	return ret;
 }
 
-Result func12(void)
+Result func12(Result *_arg, int numArgs)
 {
 	Result ret;
 	pointer library;
 	
-	String arg1 = _arg[1].value.rt_String;
-	String arg2 = _arg[2].value.rt_String;
+	String arg1 = _arg[0].value.rt_String;
+	String arg2 = _arg[1].value.rt_String;
 	
-	Result (*func)(Result*);
+	Result (*func)(Result*, int);
 	
 	ret.type = type_object;
 	ret.value.rt_pointer = NULL;
@@ -164,17 +164,26 @@ Result func12(void)
 	{
 		if(*(pointer*)&func = GetProcAddress(library, arg2))
 		{
-			ret = func(_arg + 3);
+			ret = func(_arg + 2, numArgs - 2);
 		}
+		else
+		{
+			error_found(concat("Não foi possível encontrar a função \"", arg2, "\"", end));
+		}
+		
 		FreeLibrary(library);
+	}
+	else
+	{
+		error_found(concat("Não foi possível abrir o arquivo \"", arg1, "\"", end));
 	}
 	
 	return ret;
 }
 
-DLLIMPORT void set_arg(void *arg)
+DLLIMPORT void set_error_function(P_void function)
 {
-	_arg = arg;
+	error_found = function;
 }
 
 DLLIMPORT void add_std_func(Object list)

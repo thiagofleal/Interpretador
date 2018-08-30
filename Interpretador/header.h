@@ -184,7 +184,7 @@ typedef struct _Result{
 	result_value value;
 }Result;
 
-typedef Result (* std_function)(void);
+typedef Result (* std_function)(Result*, int);
 
 typedef struct _Variable{
 	unsigned int id;

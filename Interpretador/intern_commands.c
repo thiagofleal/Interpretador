@@ -419,7 +419,8 @@ void runtime_error(int value)
 
 Result exec_execute(void)
 {
+	static int n;
 	token_expected(tok_pontuation, "(");
-	arguments();
-	return stdfun[(int)_arg[0].value.rt_double]();
+	n = arguments() - 1;
+	return stdfun[(int)_arg[0].value.rt_double](_arg + 1, n);
 }

@@ -1,21 +1,21 @@
 /*
-*	Biblioteca padr√£o da linguagem X
+*	Biblioteca padr„o da linguagem X
 *	
 *	Objetos:
 *	
-*	+	Tecla:	Classe An√¥nima
-*	+	Numero: Classe An√¥nima
-*	+	Vetor:	Classe An√¥nima
+*	+	Tecla:	Classe AnÙnima
+*	+	Numero: Classe AnÙnima
+*	+	Vetor:	Classe AnÙnima
 */
 
 /**
 *	Objeto: Tecla
-*	Classe: Classe An√¥nima
+*	Classe: Classe AnÙnima
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ ler()
 *		+ pressionada()
 */
@@ -23,166 +23,160 @@
 Objeto: Tecla = novo Classe{
 	
 	/**
-	*	M√©todo: ler
-	*	Par√¢metros:
-	*		N√£o possui par√¢metros
+	*	MÈtodo: ler
+	*	Par‚metros:
+	*		N„o possui par‚metros
 	*	Retorno: Inteiro
-	*	Descri√ß√£o: Esse m√©todo pausa a execu√ß√£o da aplica√ß√£o em console at√© que haja uma entrada pelo teclado.
-	*	Quando uma tecla √© pressionada, essa √© lida imediatamente e seu c√≥digo √© retornado para a aplica√ß√£o.
+	*	DescriÁ„o: Esse mÈtodo pausa a execuÁ„o da aplicaÁ„o em console atÈ que haja uma entrada pelo teclado.
+	*	Quando uma tecla È pressionada, essa È lida imediatamente e seu cÛdigo È retornado para a aplicaÁ„o.
 	*/
 	
 	ler()
 	{
-		retornar: funcionalidade_interna(6);
+		retornar: funcionalidade_interna(funcionalidadeInterna.lerTecla());
 	}
 	
 	/**
-	*	M√©todo: pressionada
-	*	Par√¢metros:
-	*		N√£o possui par√¢metros
+	*	MÈtodo: pressionada
+	*	Par‚metros:
+	*		N„o possui par‚metros
 	*	Retorno: Logico
-	*	Descri√ß√£o: Esse m√©todo verifica se h√° uma tecla pressionada em modo console.
-	*	Se houver uma tecla no buffer, o retorno ser√° verdadeiro, em caso contr√°rio, ser√° falso.
-	*	A entrada armazenada no buffer n√£o ser√° lida ou retirada do buffer por esse m√©todo.
+	*	DescriÁ„o: Esse mÈtodo verifica se h· uma tecla pressionada em modo console.
+	*	Se houver uma tecla no buffer, o retorno ser· verdadeiro, em caso contr·rio, ser· falso.
+	*	A entrada armazenada no buffer n„o ser· lida ou retirada do buffer por esse mÈtodo.
 	*/
 	
 	pressionada()
 	{
-		retornar: funcionalidade_interna(7);
+		retornar: funcionalidade_interna(funcionalidadeInterna.teclaPressionada());
 	}
-	
 	/*
-	*	C√≥digos de teclas especiais do teclado
-	*/
-	
-	/*
-	// SO: Linux (in√≠cio)
+	// SO: Linux (inÌcio)
 	// Descomente este trecho se seu sistema operacional for Linux
 	
-	// C√≥digo da tecla ESC
+	// CÛdigo da tecla ESC
 	ESC()
 	{retornar: 27;}
 	
-	// C√≥digo da tecla ENTER
+	// CÛdigo da tecla ENTER
 	ENTER()
 	{retornar: 10;}
 	
-	// C√≥digo da tecla BACKSPACE
+	// CÛdigo da tecla BACKSPACE
 	BACKSPACE()
 	{retornar: 127;}
 	
-	// C√≥digo da tecla TAB
+	// CÛdigo da tecla TAB
 	TAB()
 	{retornar: 9;}
 	
-	// C√≥digo da tecla SPACE
+	// CÛdigo da tecla SPACE
 	SPACE()
 	{retornar: 32;}
 	
-	// C√≥digo da tecla INSERT
+	// CÛdigo da tecla INSERT
 	INSERT()
 	{retornar: 126;}
 	
-	// C√≥digo da tecla DELETE
+	// CÛdigo da tecla DELETE
 	DELETE()
 	{retornar: 169;}
 	
-	// C√≥digo da tecla HOME
+	// CÛdigo da tecla HOME
 	HOME()
 	{retornar: 178;}
 	
-	// C√≥digo da tecla END
+	// CÛdigo da tecla END
 	END()
 	{retornar: 176;}
 	
-	// C√≥digo da tecla PAGE UP
+	// CÛdigo da tecla PAGE UP
 	PAGE_UP()
 	{retornar: 171;}
 	
-	// C√≥digo da tecla PAGE DOWN
+	// CÛdigo da tecla PAGE DOWN
 	PAGE_DOWN()
 	{retornar: 172;}
 	
-	// C√≥digo da tecla direcional acima
+	// CÛdigo da tecla direcional acima
 	SETA_ACIMA()
 	{retornar: 183;}
 	
-	// C√≥digo da tecla direcional abaixo
+	// CÛdigo da tecla direcional abaixo
 	SETA_ABAIXO()
 	{retornar: 184;}
 	
-	// C√≥digo da tecla direcional esquerda
+	// CÛdigo da tecla direcional esquerda
 	SETA_ESQUERDA()
 	{retornar: 186;}
 	
-	// C√≥digo da tecla direcional direita
+	// CÛdigo da tecla direcional direita
 	SETA_DIREITA()
 	{retornar: 185;}
 	
 	// SO: Linux (fim)
 	*/
-	
 	/*
-	// SO: Windows (in√≠cio)
+	// SO: Windows (inÌcio)
 	// Descomente este trecho se seu sistema operacional for Windows
 	
-	// C√≥digo da tecla ESC
+	// CÛdigo da tecla ESC
 	ESC()
 	{retornar: 27;}
 	
-	// C√≥digo da tecla ENTER
+	// CÛdigo da tecla ENTER
 	ENTER()
 	{retornar: 13;}
 	
-	// C√≥digo da tecla BACKSPACE
+	// CÛdigo da tecla BACKSPACE
 	BACKSPACE()
 	{retornar: 8;}
 	
-	// C√≥digo da tecla TAB
+	// CÛdigo da tecla TAB
 	TAB()
 	{retornar: 9;}
 	
-	// C√≥digo da tecla SPACE
+	// CÛdigo da tecla SPACE
 	SPACE()
 	{retornar: 32;}
 	
-	// C√≥digo da tecla INSERT
+	// CÛdigo da tecla INSERT
 	INSERT()
 	{retornar: 301;}
 	
-	// C√≥digo da tecla DELETE
+	// CÛdigo da tecla DELETE
 	DELETE()
 	{retornar: 302;}
 	
-	// C√≥digo da tecla HOME
+	// CÛdigo da tecla HOME
 	HOME()
 	{retornar: 292;}
 	
-	// C√≥digo da tecla END
+	// CÛdigo da tecla END
 	END()
 	{retornar: 291;}
 	
-	// C√≥digo da tecla PAGE UP
+	// CÛdigo da tecla PAGE UP
 	PAGE_UP()
 	{retornar: 289;}
 	
-	// C√≥digo da tecla PAGE DOWN
+	// CÛdigo da tecla PAGE DOWN
 	PAGE_DOWN()
 	{retornar: 290;}
 	
-	// C√≥digo da tecla direcional acima
+	// CÛdigo da tecla direcional acima
 	SETA_ACIMA()
 	{retornar: 294;}
 	
-	// C√≥digo da tecla direcional abaixo
+	// CÛdigo da tecla direcional abaixo
 	SETA_ABAIXO()
 	{retornar: 296;}
 	
-	// C√≥digo da tecla direcional esquerda
+	// CÛdigo da tecla direcional esquerda
 	SETA_ESQUERDA()
 	{retornar: 293;}
 	
-	// C√≥digo da tecla direcional direita
+	// CÛdigo da tecla direcional direita
 	SETA_DIREITA()
 	{retornar: 295;}
 	
@@ -192,12 +186,12 @@ Objeto: Tecla = novo Classe{
 
 /**
 *	Objeto: Numero
-*	Classe: Classe An√¥nima
+*	Classe: Classe AnÙnima
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ aleatorio({Real}Real[]: arg)
 *		+ converter(Texto: valor)
 */
@@ -205,40 +199,40 @@ Objeto: Tecla = novo Classe{
 Objeto: Numero = novo Classe{
 	
 	/**
-	*	M√©todo: aleatorio
-	*	Par√¢metros:
-	*		@ arg: Real{} - par√¢metros vari√°veis que determinam o funcionamento do m√©todo
+	*	MÈtodo: aleatorio
+	*	Par‚metros:
+	*		@ arg: Real{} - par‚metros vari·veis que determinam o funcionamento do mÈtodo
 	*	Retorno: Real
-	*	Descri√ß√£o: Esse m√©todo retorna um valor aleat√≥rio.
-	*	Seu funcionamento est√° relacionado ao n√∫mero de argumentos:
+	*	DescriÁ„o: Esse mÈtodo retorna um valor aleatÛrio.
+	*	Seu funcionamento est· relacionado ao n˙mero de argumentos:
 	*		1 argumento: corresponde ao valor limite do retorno.
-	*		N√£o h√° casas decimais.
+	*		N„o h· casas decimais.
 	*		2 argumentos: correspondem aos valores inicial e limite do retorno.
-	*		N√£o h√° casas decimais.
+	*		N„o h· casas decimais.
 	*		3 argumentos: correspondem aos valores inicial e limite do retorno
-	*		e a quantidade m√°xima de casas decimais
+	*		e a quantidade m·xima de casas decimais
 	*/
 	
 	aleatorio({Real}Real[]: arg)
 	{
 		se(arg.tamanho == 0)
 		{
-			retornar: funcionalidade_interna(8, 0, 10000, 0);
+			retornar: funcionalidade_interna(funcionalidadeInterna.numeroAleatorio(), 0, 10000, 0);
 		}
 		
 		Real: ret;
 		
 		se(arg.tamanho == 1)
 		{
-			ret = funcionalidade_interna(8, 0, arg[0], 0);
+			ret = funcionalidade_interna(funcionalidadeInterna.numeroAleatorio(), 0, arg[0], 0);
 		}
 		se(arg.tamanho == 2)
 		{
-			ret = funcionalidade_interna(8, arg[0], arg[1], 0);
+			ret = funcionalidade_interna(funcionalidadeInterna.numeroAleatorio(), arg[0], arg[1], 0);
 		}
 		se(arg.tamanho == 3)
 		{
-			ret = funcionalidade_interna(8, arg[0], arg[1], arg[2]);
+			ret = funcionalidade_interna(funcionalidadeInterna.numeroAleatorio(), arg[0], arg[1], arg[2]);
 		}
 		
 		arg.liberar();
@@ -246,30 +240,30 @@ Objeto: Numero = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: converter
-	*	Par√¢metro:
-	*		@ valor: Texto - cadeia de caracteres correspondente a um valor num√©rico
+	*	MÈtodo: converter
+	*	Par‚metro:
+	*		@ valor: Texto - cadeia de caracteres correspondente a um valor numÈrico
 	*	Retorno: Real
-	*	Descri√ß√£o: Esse m√©todo converte uma cadeia de caracteres em um valor real e o retorna √† aplica√ß√£o.
-	*	Se a cadeia de caracteres n√£o corresponder a um valor num√©rico, ser√° disparada uma exce√ß√£o.
+	*	DescriÁ„o: Esse mÈtodo converte uma cadeia de caracteres em um valor real e o retorna ‡ aplicaÁ„o.
+	*	Se a cadeia de caracteres n„o corresponder a um valor numÈrico, ser· disparada uma exceÁ„o.
 	*/
 	
 	converter(Texto: valor)
 	{
-		se(!funcionalidade_interna(9, valor))
-			disparar: novo ErroConversao("Imposs√≠vel converter \"" << valor << "\" em Real");
-		retornar: funcionalidade_interna(10, valor);
+		se(!funcionalidade_interna(funcionalidadeInterna.checarConversao(), valor))
+			disparar: novo ErroConversao("ImpossÌvel converter \"" << valor << "\" em Real");
+		retornar: funcionalidade_interna(funcionalidadeInterna.converterNumero(), valor);
 	}
 }();
 
 /**
 *	Objeto: Vetor
-*	Classe: Classe An√¥nima
+*	Classe: Classe AnÙnima
 *	
 *	Atributos:
-*		N√£o h√° atributos
+*		N„o h· atributos
 *	
-*	M√©todos:
+*	MÈtodos:
 *		+ caractere({Caractere}Caractere[]: vetor)
 *		+ logico({Logico}Logico[]: vetor)
 *		+ inteiro({Inteiro}Inteiro[]: vetor)
@@ -282,11 +276,11 @@ Objeto: Numero = novo Classe{
 Objeto: Vetor = novo Classe{
 	
 	/**
-	*	M√©todo: caractere
-	*	Par√¢metro:
-	*		@ vetor: Caractere{} - caracteres que ir√£o compor o vetor
+	*	MÈtodo: caractere
+	*	Par‚metro:
+	*		@ vetor: Caractere{} - caracteres que ir„o compor o vetor
 	*	Retorno: Caractere[]
-	*	Descri√ß√£o: Esse m√©todo converte uma lista de argumentos em um vetor do tipo Caractere
+	*	DescriÁ„o: Esse mÈtodo converte uma lista de argumentos em um vetor do tipo Caractere
 	*/
 	
 	caractere({Caractere}Caractere[]: vetor)
@@ -295,11 +289,11 @@ Objeto: Vetor = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: logico
-	*	Par√¢metro:
-	*		@ vetor: Logico{} - valores l√≥gicos que ir√£o compor o vetor
+	*	MÈtodo: logico
+	*	Par‚metro:
+	*		@ vetor: Logico{} - valores lÛgicos que ir„o compor o vetor
 	*	Retorno: Logico[]
-	*	Descri√ß√£o: Esse m√©todo converte uma lista de argumentos em um vetor do tipo Logico
+	*	DescriÁ„o: Esse mÈtodo converte uma lista de argumentos em um vetor do tipo Logico
 	*/
 	
 	logico({Logico}Logico[]: vetor)
@@ -308,11 +302,11 @@ Objeto: Vetor = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: inteiro
-	*	Par√¢metro:
-	*		@ vetor: Inteiro{} - valores inteiros que ir√£o compor o vetor
+	*	MÈtodo: inteiro
+	*	Par‚metro:
+	*		@ vetor: Inteiro{} - valores inteiros que ir„o compor o vetor
 	*	Retorno: Inteiro[]
-	*	Descri√ß√£o: Esse m√©todo converte uma lista de argumentos em um vetor do tipo Inteiro
+	*	DescriÁ„o: Esse mÈtodo converte uma lista de argumentos em um vetor do tipo Inteiro
 	*/
 	
 	inteiro({Inteiro}Inteiro[]: vetor)
@@ -321,11 +315,11 @@ Objeto: Vetor = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: real
-	*	Par√¢metro:
-	*		@ vetor: Real{} - valores reais que ir√£o compor o vetor
+	*	MÈtodo: real
+	*	Par‚metro:
+	*		@ vetor: Real{} - valores reais que ir„o compor o vetor
 	*	Retorno: Real[]
-	*	Descri√ß√£o: Esse m√©todo converte uma lista de argumentos em um vetor do tipo Real
+	*	DescriÁ„o: Esse mÈtodo converte uma lista de argumentos em um vetor do tipo Real
 	*/
 	
 	real({Real}Real[]: vetor)
@@ -334,11 +328,11 @@ Objeto: Vetor = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: texto
-	*	Par√¢metro:
-	*		@ vetor: Texto{} - textos que ir√£o compor o vetor
+	*	MÈtodo: texto
+	*	Par‚metro:
+	*		@ vetor: Texto{} - textos que ir„o compor o vetor
 	*	Retorno: Texto[]
-	*	Descri√ß√£o: Esse m√©todo converte uma lista de argumentos em um vetor do tipo Texto
+	*	DescriÁ„o: Esse mÈtodo converte uma lista de argumentos em um vetor do tipo Texto
 	*/
 	
 	texto({Texto}Texto[]: vetor)
@@ -347,11 +341,11 @@ Objeto: Vetor = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: arquivo
-	*	Par√¢metro:
-	*		@ vetor: Arquivo{} - arquivos que ir√£o compor o vetor
+	*	MÈtodo: arquivo
+	*	Par‚metro:
+	*		@ vetor: Arquivo{} - arquivos que ir„o compor o vetor
 	*	Retorno: Arquivo[]
-	*	Descri√ß√£o: Esse m√©todo converte uma lista de argumentos em um vetor do tipo Arquivo
+	*	DescriÁ„o: Esse mÈtodo converte uma lista de argumentos em um vetor do tipo Arquivo
 	*/
 	
 	arquivo({Arquivo}Arquivo[]: vetor)
@@ -360,11 +354,11 @@ Objeto: Vetor = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: objeto
-	*	Par√¢metro:
-	*		@ vetor: Objeto{} - objetos que ir√£o compor o vetor
+	*	MÈtodo: objeto
+	*	Par‚metro:
+	*		@ vetor: Objeto{} - objetos que ir„o compor o vetor
 	*	Retorno: Objeto[]
-	*	Descri√ß√£o: Esse m√©todo converte uma lista de argumentos em um vetor do tipo Objeto
+	*	DescriÁ„o: Esse mÈtodo converte uma lista de argumentos em um vetor do tipo Objeto
 	*/
 	
 	objeto({Objeto}Objeto[]: vetor)
@@ -373,15 +367,15 @@ Objeto: Vetor = novo Classe{
 	}
 	
 	/**
-	*	M√©todo: nulo
-	*	Par√¢metros:
-	*		N√£o h√° par√¢metros
+	*	MÈtodo: nulo
+	*	Par‚metros:
+	*		N„o h· par‚metros
 	*	Retorno: Vetor nulo
-	*	Descri√ß√£o: Retorna um vetor nulo compar√°vel a qualquer tipo de vetor
+	*	DescriÁ„o: Retorna um vetor nulo compar·vel a qualquer tipo de vetor
 	*/
 	
 	nulo()
 	{
-		retornar: funcionalidade_interna(11);
+		retornar: funcionalidade_interna(funcionalidadeInterna.vetorNulo());
 	}
 }();

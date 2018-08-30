@@ -8,6 +8,49 @@
 *	+	objetos.bx
 */
 
+Objeto: funcionalidadeInterna = novo Classe{
+	
+	abrirArquivo()
+	{retornar: 0;}
+	
+	comando()
+	{retornar: 1;}
+	
+	cores()
+	{retornar: 2;}
+	
+	esperar()
+	{retornar: 3;}
+	
+	posicionar()
+	{retornar: 4;}
+	
+	sair()
+	{retornar: 5;}
+	
+	lerTecla()
+	{retornar: 6;}
+	
+	teclaPressionada()
+	{retornar: 7;}
+	
+	numeroAleatorio()
+	{retornar: 8;}
+	
+	checarConversao()
+	{retornar: 9;}
+	
+	converterNumero()
+	{retornar: 10;}
+	
+	vetorNulo()
+	{retornar: 11;}
+	
+	bibliotecaDinamica()
+	{retornar: 12;}
+	
+}();
+
 /**
 *	Arquivo: erro.bx
 *	Declara as classes básicas de disparo de exceções
