@@ -2,9 +2,9 @@
 
 #define index_error_value	5
 
-extern void error_found(String);
+extern void error_found(string);
 extern void free_var(Variable*);
-extern bool token_expected(int, String);
+extern bool token_expected(int, string);
 extern bool _typeof(p_Object, int);
 extern int arguments(void);
 extern Result expression(void);

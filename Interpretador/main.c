@@ -10,17 +10,17 @@ extern void init_meth_id(void);
 extern void initFileList(void);
 extern void deleteFileList(void);
 extern int arguments(void);
-extern unsigned int intern_identifier(String);
+extern unsigned int intern_identifier(string);
 extern Result expression(void);
 extern std_function ARRAY init_functions(void);
-extern Token * tokenMaker(String, String);
+extern Token * tokenMaker(string, string);
 extern Result * interp_block(void);
 extern Function * find_func(unsigned int);
 
 extern Except except;
 
 int ind_var, ind_func, ind_arg, ind_class, ind_glob;
-String library_path;
+string library_path;
 Token *token, *default_constructor, *default_destructor, *runtime_error_detected, unknow_class;
 std_function ARRAY stdfun;
 
@@ -34,8 +34,8 @@ str_variable var_inf[] = {
 	{type_bool, sizeof(bool)},
 	{type_int, sizeof(int)},
 	{type_real, sizeof(double)},
-	{type_string, sizeof(String)},
-	{type_file, sizeof(File)},
+	{type_string, sizeof(string)},
+	{type_file, sizeof(file)},
 	{type_object, sizeof(p_Object)},
 	{type_matrix, sizeof(str_matrix)},
 	{type_null, sizeof NULL},
@@ -46,19 +46,29 @@ int meth_id[meth_id_number];
 
 Define_Exception(InterpreterException, "Erro na execução do código", GenericException);
 
-void error_found(String str)
+void error_found(string str)
 {
-	throw(InterpreterException, concat("Arquivo: ", token->file, "\nErro na linha ", getText(is(token->line)), ":\n\t>> ", str, end));
+	throw(
+		InterpreterException, concat(
+			"Arquivo: ",
+			token->file,
+			"\nErro na linha ",
+			getText(is(token->line)),
+			":\n\t>> ",
+			str,
+			$end
+		)
+	);
 }
 
-bool token_expected(int type, String value)
+bool token_expected(int type, string value)
 {
 	++ token;
 	if(token->type == type && !strcmp(token->value, value))
 		return true;
 	else
 	{
-		static String tok_type_name[] = {
+		static string tok_type_name[] = {
 			"operador",
 			"pontuação",
 			"constante",
@@ -68,7 +78,10 @@ bool token_expected(int type, String value)
 			"identificador",
 			"fim de arquivo"
 		};
-		String str_err = concat("Espera-se ", tok_type_name[type], " \"", value, "\" após \"", (token - 1)->value, "\"", end);
+		string str_err = concat(
+			"Espera-se ", tok_type_name[type],
+			" \"", value, "\" após \"", (token - 1)->value, "\"", $end
+		);
 		error_found(str_err);
 		free(str_err);
 		return false;
@@ -79,19 +92,19 @@ void free_var(Variable * var)
 {
 	if(var->type == type_string)
 	{
-		free(*(String*)var->value);
+		free(*(string*)var->value);
 	}
 	
 	free(var->value);
 }
 
-String throws open_file(String name)
+string $throws open_file(string name)
 {
-	Scanner read = new Scanner(Tonight.std.file.input);
+	Scanner read = new Scanner(Tonight.Std.File.input);
 	
 	int num_char = 0;
 	char *prog, *begin;
-	File arq;
+	file arq;
 	
 	try
 	{
@@ -105,7 +118,7 @@ String throws open_file(String name)
 	}
 	catch(FileOpenException)
 	{
-		String error = concat("Não foi possível abrir o arquivo \"", name, "\"", end);
+		string error = concat("Não foi possível abrir o arquivo \"", name, "\"", $end);
 		error_found(error);
 		free(error);
 	}
@@ -113,7 +126,7 @@ String throws open_file(String name)
 	{}
 	
 	rewind(arq);
-	prog = begin = new array.Char(num_char);
+	prog = begin = new Array.Char(num_char);
 	
 	try
 	{
@@ -131,12 +144,12 @@ String throws open_file(String name)
 	return begin;
 }
 
-String get_library_path(String argv)
+string get_library_path(string argv)
 {
 	int i, j;
-	String interp = interpreter_name;
-	String library = library_folder;
-	String url_library = new array.Char(strlen(argv) - strlen(interp) + strlen(library) + 1);
+	string interp = interpreter_name;
+	string library = library_folder;
+	string url_library = new Array.Char(strlen(argv) - strlen(interp) + strlen(library) + 1);
 	
 	for(i = 0; i < strlen(argv) - strlen(interp); i++)
 	{
@@ -150,11 +163,11 @@ String get_library_path(String argv)
 	return url_library;
 }
 
-int main(int argc, String argv[])
+int main(int argc, string argv[])
 {
-	Writer error = new Writer(Tonight.std.error);
+	Writer error = new Writer(Tonight.Std.error);
 	
-	String prog, library;
+	string prog, library;
 	Function * f;
 	Result *ret = NULL;
 	jmp_buf buf;
@@ -184,7 +197,7 @@ int main(int argc, String argv[])
 		
 		//Open the standard library
 		library_path = get_library_path(argv[0]);
-		library = concat(library_path, library_name, end);
+		library = concat(library_path, library_name, $end);
 		prog = open_file(library);
 		token = tokenMaker(library, prog);
 		free(prog);
@@ -227,7 +240,7 @@ int main(int argc, String argv[])
 			_arg[0].type = type_matrix;
 			_arg[0].value.rt_matrix.dimensions = 1;
 			_arg[0].value.rt_matrix.length = argc - 1;
-			_arg[0].value.rt_matrix.size = sizeof(String);
+			_arg[0].value.rt_matrix.size = sizeof(string);
 			_arg[0].value.rt_matrix.type = type_string;
 			_arg[0].value.rt_matrix.value = argv + 1;
 			parameters(1);
@@ -242,21 +255,21 @@ int main(int argc, String argv[])
 	}
 	catch(FileOpenException)
 	{
-		error.println("Não foi possível abrir o arquivo...\nstrerror(): ", strerror(errno), end);
+		error.println("Não foi possível abrir o arquivo...\nstrerror(): ", strerror(errno), $end);
 	}
 	catch(InterpreterException)
 	{
 		Exception e = getException();
-		error.printargln(Error(e), Message(e), end);
+		error.printargln(Error(e), Message(e), $end);
 	}
 	catch(GenericException)
 	{
 		Exception e = getException();
-		error.println("Erro inesperado: ", Error(e), "\nMensagem de erro: ", Message(e),end);
+		error.println("Erro inesperado: ", Error(e), "\nMensagem de erro: ", Message(e), $end);
 		
 		if(errno)
 		{
-			error.println("strerror(errno): ", strerror(errno), end);
+			error.println("strerror(errno): ", strerror(errno), $end);
 		}
 	}
 	finally

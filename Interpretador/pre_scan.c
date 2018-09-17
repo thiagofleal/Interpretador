@@ -3,11 +3,11 @@
 #include <string.h>
 #include "header.h"
 
-extern void error_found(String);
-extern bool token_expected(int, String);
-extern String throws open_file(String);
+extern void error_found(string);
+extern bool token_expected(int, string);
+extern string $throws open_file(string);
 extern Result expression(void);
-extern Token * tokenMaker(String, String);
+extern Token * tokenMaker(string, string);
 extern Class * find_class(unsigned int);
 
 extern int ind_var, ind_func, ind_arg, ind_class;
@@ -20,7 +20,7 @@ extern Class _class[];
 
 void pre_scan(void);
 
-static Object fileList = NULL;
+static object fileList = NULL;
 
 void ignore_block(void)
 {
@@ -126,7 +126,7 @@ void declare_class(Token * id_class)
 						
 						if(!p_base)
 						{
-							String str_err = concat("A classe \"", token->value, "\" não foi declarada", end);
+							string str_err = concat("A classe \"", token->value, "\" não foi declarada", $end);
 							error_found(str_err);
 							free(str_err);
 						}
@@ -169,44 +169,43 @@ void deleteFileList(void)
 	}
 }
 
-static void registerFile(String file)
+static void registerFile(string _file)
 {
 	if(fileList)
 	{
-		initIList().add(fileList, file);
+		iList.add(fileList, _file);
 	}
 }
 
-bool checkFile(String file)
+bool checkFile(string _file)
 {
 	if(fileList)
 	{
-		IList iList = initIList();
 		register int i, size = iList.size(fileList);
 		
 		for(i = 0; i < size; i++)
 		{
-			if(!strcmp(iList.get(fileList, i), file))
+			if(!strcmp(iList.get(fileList, i), _file))
 			{
 				return true;
 			}
 		}
 		
-		registerFile(file);
+		registerFile(_file);
 		return false;
 	}
 }
 
-static void include_file(String file)
+static void include_file(string _file)
 {
-	String prog;
+	string prog;
 	Token * bk_tok;
 	
-	if(!checkFile(file))
+	if(!checkFile(_file))
 	{
-		prog = open_file(file);
+		prog = open_file(_file);
 		bk_tok = token;
-		token = tokenMaker(file, prog);
+		token = tokenMaker(_file, prog);
 		free(prog);
 		pre_scan();
 		token = bk_tok;
@@ -224,13 +223,13 @@ void pre_scan(void)
 				{
 					case kw_Incluir:
 					{
-						String file;
+						string _file;
 						
 						token_expected(tok_pontuation, ":");
 						++ token;
-						file = expression().value.rt_String;
+						_file = expression().value.rt_String;
 						token_expected(tok_pontuation, ";");
-						include_file(file);
+						include_file(_file);
 						break;
 					}
 					case kw_Caractere:

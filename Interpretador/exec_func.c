@@ -3,8 +3,8 @@
 
 extern void free_var(Variable*);
 extern void attrib(pointer, int, Result*);
-extern bool token_expected(int, String);
-extern bool error_found(String);
+extern bool token_expected(int, string);
+extern bool error_found(string);
 extern bool declare_prmtr(int);
 extern Result expression(void);
 extern Result * interp_block(void);

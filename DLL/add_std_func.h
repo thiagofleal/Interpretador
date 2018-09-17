@@ -8,6 +8,6 @@
 #endif
 
 DLLIMPORT void set_error_function(P_void function);
-DLLIMPORT void add_std_func(Object list);
+DLLIMPORT void add_std_func(object list);
 
 #endif

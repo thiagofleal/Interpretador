@@ -5,11 +5,11 @@
 #define method(_meth)	meth_id[meth_id_##_meth]
 
 extern void exec_method(Method*, str_Object*);
-extern void error_found(String);
+extern void error_found(string);
 extern void free_var(Variable*);
-extern bool token_expected(int, String);
+extern bool token_expected(int, string);
 extern int arguments(void);
-extern unsigned int intern_identifier(String);
+extern unsigned int intern_identifier(string);
 extern Result expression(void);
 extern Class * find_class(unsigned int);
 extern Attribute * find_attr(p_Object*, unsigned int);
@@ -63,12 +63,12 @@ int expected_arguments(int num_args_min, int num_args_max)
 	return arg;
 }
 
-String format_string(const register String _format, Result *args, register int args_length)
+string format_string(const register string _format, Result *args, register int args_length)
 {
 	register bool zero = false;
 	register int integer = 0, decimal = 5;
 	static char str[1001];
-	String format = _format;
+	string format = _format;
 	
 	*str = 0;
 	
@@ -176,14 +176,14 @@ String format_string(const register String _format, Result *args, register int a
 bool methods_Arquivo(Result * r, int _meth_id)
 {
 	register int ret = true;
-	File file = r->value.rt_pointer;
+	file file = r->value.rt_pointer;
 	Result bk_arg[num_arg];
 	
 	memcpy(bk_arg, _arg, sizeof bk_arg);
 	
 	if(_meth_id == method(escrever) || _meth_id == method(escreverLinha))
 	{
-		String s;
+		string s;
 		
 		expected_arguments(1, 1);
 		
@@ -202,7 +202,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 				s = toString(_arg[0].value.rt_String);
 				break;
 			default:
-				s = new array.Char(17);
+				s = new Array.Char(17);
 				sprintf(s, "%p", _arg[0].value.rt_pointer);
 				break;
 		}
@@ -301,7 +301,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 bool methods_Texto(Result * r, int _meth_id)
 {
 	register int ret = true;
-	String str = r->value.rt_String;
+	string str = r->value.rt_String;
 	Result bk_arg[num_arg];
 	
 	memcpy(bk_arg, _arg, sizeof bk_arg);
@@ -419,9 +419,9 @@ bool _typeof(p_Object obj, int classId)
 bool methods_Objeto(Result * r, int _meth_id)
 {
 	p_Object obj = r->value.rt_pointer;
-	static String name;
+	static string name;
 	
-	name = (String)&obj->p_class->name;
+	name = (string)&obj->p_class->name;
 	
 	if(_meth_id == method(destruir))
 	{
@@ -460,7 +460,7 @@ bool methods_Objeto(Result * r, int _meth_id)
 		
 		if(!m)
 		{
-			String str = concat("A classe \"", name, "\" não possui o método \"", token->value, "\"", end);
+			string str = concat("A classe \"", name, "\" não possui o método \"", token->value, "\"", $end);
 			error_found(str);
 			free(str);
 			return false;
@@ -478,7 +478,7 @@ bool methods_Objeto(Result * r, int _meth_id)
 		
 		if(!a)
 		{
-			String str = concat("A classe \"", name, "\" não possui o atributo \"", token->value, "\"", end);
+			string str = concat("A classe \"", name, "\" não possui o atributo \"", token->value, "\"", $end);
 			error_found(str);
 			free(str);
 			return false;

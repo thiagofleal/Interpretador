@@ -98,8 +98,8 @@ enum tok_type{
 
 typedef struct _Token{
 	int line;
-	String file;
-	String value;
+	string file;
+	string value;
 	int type;
 	int intern;
 }Token;
@@ -174,7 +174,7 @@ typedef struct _str_matrix{
 typedef union _result_value{
 	bool rt_bool;
 	double rt_double;
-	String rt_String;
+	string rt_String;
 	pointer rt_pointer;
 	str_matrix rt_matrix;
 }result_value;

@@ -7,7 +7,7 @@ Interpretador para a linguagem X - pt/br
  ## Compilação
 
 * Linguagem: C
-* Framework: [Tonight](https://github.com/thiagofleal/Tonight)
+* Frameworks: [Tonight](https://github.com/thiagofleal/Tonight), [Tonight/List](https://github.com/thiagofleal/List)
 * Link:
  >* Linux: -ltonight -llist ../SO/sointerp.so
  >* Windows: -ltonight -llist ..\DLL\dllinterp.dll

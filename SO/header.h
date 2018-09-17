@@ -24,7 +24,7 @@ typedef struct{
 typedef union{
 	bool rt_bool;
 	double rt_double;
-	String rt_String;
+	string rt_String;
 	pointer rt_pointer;
 	str_matrix rt_matrix;
 }result_type;

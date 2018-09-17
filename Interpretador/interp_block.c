@@ -8,8 +8,8 @@ extern void exec_do(void);
 extern void exec_for(void);
 extern void exec_try(void);
 extern void exec_throw(void);
-extern void error_found(String);
-extern bool token_expected(int, String);
+extern void error_found(string);
+extern bool token_expected(int, string);
 extern Result expression(void);
 extern Result * exec_return(void);
 

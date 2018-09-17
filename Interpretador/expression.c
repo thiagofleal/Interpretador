@@ -5,11 +5,11 @@
 extern void attrib_result(Result*, pointer, int);
 extern void declare_class(Token*);
 extern void runtime_error(int);
-extern void error_found(String);
+extern void error_found(string);
 extern void op_attrib(pointer, int, Result*, register int);
 extern void exec_func(Function*);
 extern void exec_method(Method*, str_Object*);
-extern bool token_expected(int, String);
+extern bool token_expected(int, string);
 extern bool methods_Arquivo(Result*, int);
 extern bool methods_Texto(Result*, int);
 extern bool methods_Matriz(Result*, int);
@@ -28,7 +28,7 @@ extern Variable _var[];
 extern Function _func[];
 extern Result _arg[];
 extern Class _class[];
-extern String library_path;
+extern string library_path;
 
 static void expText(Result*);
 static void expBool(Result*);
@@ -57,7 +57,7 @@ INLINE double pow_10(int exp)
 	return ret;
 }
 
-double stod(String str)
+double stod(string str)
 {
 	double value = 0.0;
 	
@@ -96,7 +96,7 @@ Result expression(void)
 
 static void expText(Result *r)
 {
-	String str1, str2;
+	string str1, str2;
 	
 	expBool(r);
 	++ token;
@@ -131,7 +131,7 @@ static void expText(Result *r)
 				break;
 			}
 		}
-		r->value.rt_String = concat(str1, str2, end);
+		r->value.rt_String = concat(str1, str2, $end);
 		free(str1);
 		free(str2);
 		r->type = type_string;
@@ -465,7 +465,7 @@ static void expElement(Result *r)
 		if(token->intern == op_dot)
 		{
 			int id;
-			String name, str_err = NULL;
+			string name, str_err = NULL;
 			
 			++ token;
 			id = token->intern;
@@ -476,7 +476,7 @@ static void expElement(Result *r)
 				case type_string:
 					if(!methods_Texto(r, id))
 					{
-						str_err = concat("O tipo de dados \"Texto\" não possui o método/atibuto \"", name, "\"", end);
+						str_err = concat("O tipo de dados \"Texto\" não possui o método/atibuto \"", name, "\"", $end);
 					}
 					break;
 				case type_file:
@@ -486,7 +486,7 @@ static void expElement(Result *r)
 					}
 					if(!methods_Arquivo(r, id))
 					{
-						str_err = concat("O tipo de dados \"Arquivo\" não possui o método/atributo \"", name, "\"", end);
+						str_err = concat("O tipo de dados \"Arquivo\" não possui o método/atributo \"", name, "\"", $end);
 					}
 					break;
 				case type_object:
@@ -506,7 +506,7 @@ static void expElement(Result *r)
 							&_virtual->p_class->name[0],
 							"\" não possui o método/atributo \"",
 							name,
-							"\"", end
+							"\"", $end
 						);
 					}
 					_virtual = bk_virtual;
@@ -515,7 +515,7 @@ static void expElement(Result *r)
 				case type_matrix:
 					if(!methods_Matriz(r, id))
 					{
-						str_err = concat("O tipo de dados \"Vetor\" não possui o método/atributo \"", name, "\"", end);
+						str_err = concat("O tipo de dados \"Vetor\" não possui o método/atributo \"", name, "\"", $end);
 					}
 					break;
 			}
@@ -716,7 +716,7 @@ static void expValue(Result *r)
 						
 						if(!obj)
 						{
-							String str_err = concat("A classe \"", token->value, "\" não foi declarada", end);
+							string str_err = concat("A classe \"", token->value, "\" não foi declarada", $end);
 							error_found(str_err);
 							free(str_err);
 						}
@@ -731,7 +731,7 @@ static void expValue(Result *r)
 						
 						if(!obj)
 						{
-							String str_err = concat("A classe \"", token->value, "\" não foi declarada", end);
+							string str_err = concat("A classe \"", token->value, "\" não foi declarada", $end);
 							error_found(str_err);
 							free(str_err);
 						}
@@ -787,7 +787,7 @@ static void expValue(Result *r)
 				
 				if(!f)
 				{
-					String str = concat("A função \"", token->value, "\" não foi declarada", end);
+					string str = concat("A função \"", token->value, "\" não foi declarada", $end);
 					error_found(str);
 					free(str);
 				}
@@ -804,7 +804,7 @@ static void expValue(Result *r)
 				
 				if(!v)
 				{
-					String str = concat("A variável \"", token->value, "\" não foi declarada", end);
+					string str = concat("A variável \"", token->value, "\" não foi declarada", $end);
 					error_found(str);
 					free(str);
 					return;
@@ -838,7 +838,7 @@ static void expValue(Result *r)
 					
 					r->type = type_string;
 					++ token;
-					r->value.rt_String = concat(library_path, token->value, end);
+					r->value.rt_String = concat(library_path, token->value, $end);
 					break;
 			}
 	}

@@ -1,8 +1,8 @@
 #include "header.h"
 
-extern void error_found(String);
+extern void error_found(string);
 extern void runtime_error(int);
-extern bool token_expected(int, String);
+extern bool token_expected(int, string);
 extern Result expression(void);
 
 void attrib(pointer dest, int type, Result * r)
@@ -22,14 +22,14 @@ void attrib(pointer dest, int type, Result * r)
 			*(double*)dest = r->value.rt_double;
 			return;
 		case type_string:
-			if(*(String*)dest)
+			if(*(string*)dest)
 			{
-				free(*(String*)dest);
+				free(*(string*)dest);
 			}
 			if(r->value.rt_String)
-				*(String*)dest = toString(r->value.rt_String);
+				*(string*)dest = toString(r->value.rt_String);
 			else
-				*(String*)dest = toString("");
+				*(string*)dest = toString("");
 			return;
 		case type_object:
 		case type_file:
@@ -124,8 +124,8 @@ void attrib_result(Result * r, pointer v, int type)
 			r->value.rt_double = *(double*)v;
 			break;
 		case type_string:
-			if(*(String*)v)
-				r->value.rt_String = toString(*(String*)v);
+			if(*(string*)v)
+				r->value.rt_String = toString(*(string*)v);
 			else
 				r->value.rt_String = toString("");
 			break;

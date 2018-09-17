@@ -5,8 +5,8 @@
 #include "header.h"
 
 static char *p_prog, *begin;
-static String file;
-static Object idList = NULL;
+static string _file;
+static object idList = NULL;
 
 static char character(void)
 {
@@ -60,7 +60,7 @@ static int line(void)
 	return ret;
 }
 
-static int reserved(String word)
+static int reserved(string word)
 {
 	if(!strcmp(word, "Caractere"))
 		return kw_Caractere;
@@ -129,10 +129,9 @@ static int reserved(String word)
 	return 0;
 }
 
-unsigned int intern_identifier(String id)
+unsigned int intern_identifier(string id)
 {
 	register int i = 0, size;
-	IList iList = initIList();
 	
 	size = iList.size(idList);
 	
@@ -161,7 +160,6 @@ void delete_list(void)
 	if(idList)
 	{
 		pointer p;
-		IList iList = initIList();
 		
 		while(iList.size(idList))
 		{
@@ -178,10 +176,10 @@ void delete_list(void)
 static Token nextToken(void)
 {
 	int i = 0;
-	String v = NULL;
+	string v = NULL;
 	Token ret = {};
 	
-	ret.file = file;
+	ret.file = _file;
 	/* Ignore white spaces */
 	while(isspace(*p_prog))
 		++ p_prog;
@@ -222,7 +220,7 @@ static Token nextToken(void)
 	if(strchr("(){};:,", * p_prog))
 	{
 		ret.type = tok_pontuation;
-		ret.value = new array.Char(2);
+		ret.value = new Array.Char(2);
 		ret.value[0] = *p_prog;
 		ret.value[1] = 0;
 		++ p_prog;
@@ -234,7 +232,7 @@ static Token nextToken(void)
 	{
 		++ p_prog;
 		ret.type = tok_character;
-		ret.value = new array.Char(2);
+		ret.value = new Array.Char(2);
 		ret.value[0] = character();
 		ret.value[1] = 0;
 		++ p_prog;
@@ -244,7 +242,7 @@ static Token nextToken(void)
 		return ret;
 	}
 	
-	v = new array.Char(1001);
+	v = new Array.Char(1001);
 	
 	/* Operators */
 	if(strchr("+-*/^\\=~!><&|@#$%[].", *p_prog))
@@ -590,12 +588,12 @@ static Token nextToken(void)
 	return ret;
 }
 
-Token * throws tokenMaker(String _file, String prog)
+Token * $throws tokenMaker(string _File, string prog)
 {
 	int num_tok = 0;
 	Token tok, *p_ret, *ret;
 	
-	file = _file;
+	_file = _File;
 	begin = p_prog = prog;
 	
 	do

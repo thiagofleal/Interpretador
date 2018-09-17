@@ -1,8 +1,8 @@
 #include "header.h"
 
-extern void error_found(String);
+extern void error_found(string);
 extern void attrib(pointer, int, Result*);
-extern bool token_expected(int, String);
+extern bool token_expected(int, string);
 extern Result expression(void);
 
 extern int ind_var, ind_func, ind_arg, ind_class;

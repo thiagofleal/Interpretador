@@ -41,7 +41,7 @@ Result func0(Result *_arg, int numArgs)
 Result func1(Result *_arg, int numArgs)
 {
 	Result ret;
-	const String cmd = _arg[0].value.rt_String;
+	const string cmd = _arg[0].value.rt_String;
 	
 	ret.type = type_real;
 	ret.value.rt_double = (double)system(cmd);
@@ -54,7 +54,7 @@ Result func2(Result *_arg, int numArgs)
 	Result ret;
 	static Painter paint;
 	
-	paint = new Painter(Tonight.resources.Color);
+	paint = new Painter(Tonight.Resources.Color);
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
@@ -125,7 +125,7 @@ Result func8(Result *_arg, int numArgs)
 	double arg2 = _arg[1].value.rt_double;
 	int arg3 = (int)_arg[2].value.rt_double;
 	
-	rand = new Random(Tonight.std.random.range);
+	rand = new Random(Tonight.Std.Random.range);
 	
 	ret.type = type_real;
 	ret.value.rt_double = rand.nextDouble(arg1, arg2, arg3);
@@ -135,7 +135,7 @@ Result func8(Result *_arg, int numArgs)
 
 Result func9(Result *_arg, int numArgs)
 {
-	String str = _arg[0].value.rt_String, p;
+	string str = _arg[0].value.rt_String, p;
 	Result ret;
 	
 	strtod(str, &p);
@@ -174,8 +174,8 @@ Result func12(Result *_arg, int numArgs)
 	Result ret;
 	pointer library;
 	
-	String arg1 = _arg[0].value.rt_String;
-	String arg2 = _arg[1].value.rt_String;
+	string arg1 = _arg[0].value.rt_String;
+	string arg2 = _arg[1].value.rt_String;
 	
 	Result (*func)(Result*, int);
 	
@@ -190,14 +190,14 @@ Result func12(Result *_arg, int numArgs)
 		}
 		else
 		{
-			error_found(concat("Não foi possível encontrar a função \"", arg2, "\"", end));
+			error_found(concat("Não foi possível encontrar a função \"", arg2, "\"", $end));
 		}
 		
 		FreeLibrary(library);
 	}
 	else
 	{
-		error_found(concat("Não foi possível abrir o arquivo \"", arg1, "\"", end));
+		error_found(concat("Não foi possível abrir o arquivo \"", arg1, "\"", $end));
 	}
 	
 	return ret;
@@ -208,21 +208,19 @@ DLLIMPORT void set_error_function(P_void function)
 	error_found = function;
 }
 
-DLLIMPORT void add_std_func(Object list)
+DLLIMPORT void add_std_func(object list)
 {
-	IList iL = initIList();
-	
-	iL.add(list, func0);
-	iL.add(list, func1);
-	iL.add(list, func2);
-	iL.add(list, func3);
-	iL.add(list, func4);
-	iL.add(list, func5);
-	iL.add(list, func6);
-	iL.add(list, func7);
-	iL.add(list, func8);
-	iL.add(list, func9);
-	iL.add(list, func10);
-	iL.add(list, func11);
-	iL.add(list, func12);
+	iList.add(list, func0);
+	iList.add(list, func1);
+	iList.add(list, func2);
+	iList.add(list, func3);
+	iList.add(list, func4);
+	iList.add(list, func5);
+	iList.add(list, func6);
+	iList.add(list, func7);
+	iList.add(list, func8);
+	iList.add(list, func9);
+	iList.add(list, func10);
+	iList.add(list, func11);
+	iList.add(list, func12);
 }
