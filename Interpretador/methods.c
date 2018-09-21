@@ -202,7 +202,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 				s = toString(_arg[0].value.rt_String);
 				break;
 			default:
-				s = new Array.Char(17);
+				s = new Memory(sizeof(char) * 17);
 				sprintf(s, "%p", _arg[0].value.rt_pointer);
 				break;
 		}

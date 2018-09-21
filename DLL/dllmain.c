@@ -125,7 +125,7 @@ Result func8(Result *_arg, int numArgs)
 	double arg2 = _arg[1].value.rt_double;
 	int arg3 = (int)_arg[2].value.rt_double;
 	
-	rand = new Random(Tonight.Std.Random.range);
+	rand = new Random(Tonight.Std.Random.Range);
 	
 	ret.type = type_real;
 	ret.value.rt_double = rand.nextDouble(arg1, arg2, arg3);

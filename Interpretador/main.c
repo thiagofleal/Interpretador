@@ -100,7 +100,7 @@ void free_var(Variable * var)
 
 string $throws open_file(string name)
 {
-	Scanner read = new Scanner(Tonight.Std.File.input);
+	Scanner read = new Scanner(Tonight.Std.File.Input);
 	
 	int num_char = 0;
 	char *prog, *begin;
@@ -126,7 +126,7 @@ string $throws open_file(string name)
 	{}
 	
 	rewind(arq);
-	prog = begin = new Array.Char(num_char);
+	prog = begin = Array.Char(num_char);
 	
 	try
 	{
@@ -149,7 +149,7 @@ string get_library_path(string argv)
 	int i, j;
 	string interp = interpreter_name;
 	string library = library_folder;
-	string url_library = new Array.Char(strlen(argv) - strlen(interp) + strlen(library) + 1);
+	string url_library = Array.Char(strlen(argv) - strlen(interp) + strlen(library) + 1);
 	
 	for(i = 0; i < strlen(argv) - strlen(interp); i++)
 	{
@@ -165,7 +165,7 @@ string get_library_path(string argv)
 
 int main(int argc, string argv[])
 {
-	Writer error = new Writer(Tonight.Std.error);
+	Writer error = new Writer(Tonight.Std.Error);
 	
 	string prog, library;
 	Function * f;
@@ -200,13 +200,13 @@ int main(int argc, string argv[])
 		library = concat(library_path, library_name, $end);
 		prog = open_file(library);
 		token = tokenMaker(library, prog);
-		free(prog);
+		Array.free(prog);
 		pre_scan();
 		
 		// Open file and separate in tokens
 		prog = open_file(argv[1]);
 		token = tokenMaker(argv[1], prog);
-		free(prog);
+		Array.free(prog);
 		
 		// Initialize functions, classes and global variables
 		pre_scan();

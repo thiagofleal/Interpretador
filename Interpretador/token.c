@@ -220,7 +220,7 @@ static Token nextToken(void)
 	if(strchr("(){};:,", * p_prog))
 	{
 		ret.type = tok_pontuation;
-		ret.value = new Array.Char(2);
+		ret.value = new Memory(sizeof(char) * 2);
 		ret.value[0] = *p_prog;
 		ret.value[1] = 0;
 		++ p_prog;
@@ -232,7 +232,7 @@ static Token nextToken(void)
 	{
 		++ p_prog;
 		ret.type = tok_character;
-		ret.value = new Array.Char(2);
+		ret.value = new Memory(sizeof(char) * 2);
 		ret.value[0] = character();
 		ret.value[1] = 0;
 		++ p_prog;
@@ -242,7 +242,7 @@ static Token nextToken(void)
 		return ret;
 	}
 	
-	v = new Array.Char(1001);
+	v = Array.Char(1001);
 	
 	/* Operators */
 	if(strchr("+-*/^\\=~!><&|@#$%[].", *p_prog))
@@ -522,7 +522,7 @@ static Token nextToken(void)
 		++ p_prog;
 		v[2] = 0;
 		ret.value = toString(v);
-		free(v);
+		Array.free(v);
 		return ret;
 	}
 	
@@ -544,7 +544,7 @@ static Token nextToken(void)
 		}
 		v[i] = 0;
 		ret.value = toString(v);
-		free(v);
+		Array.free(v);
 		return ret;
 	}
 	
@@ -564,7 +564,7 @@ static Token nextToken(void)
 		v[i] = 0;
 		++ p_prog;
 		ret.value = toString(v);
-		free(v);
+		Array.free(v);
 		return ret;
 	}
 	
@@ -584,7 +584,7 @@ static Token nextToken(void)
 		ret.type = tok_identifier;
 	}
 	ret.value = toString(v);
-	free(v);
+	Array.free(v);
 	return ret;
 }
 

@@ -206,7 +206,7 @@ static void include_file(string _file)
 		prog = open_file(_file);
 		bk_tok = token;
 		token = tokenMaker(_file, prog);
-		free(prog);
+		Array.free(prog);
 		pre_scan();
 		token = bk_tok;
 	}
