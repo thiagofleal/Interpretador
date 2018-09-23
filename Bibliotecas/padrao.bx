@@ -46,8 +46,14 @@ Objeto: funcionalidadeInterna = novo Classe{
 	vetorNulo()
 	{retornar: 11;}
 	
-	bibliotecaDinamica()
+	abrirBibliotecaDinamica()
 	{retornar: 12;}
+	
+	acessarFuncaoBibliotecaDinamica()
+	{retornar: 13;}
+	
+	fecharBibliotecaDinamica()
+	{retornar: 14;}
 	
 }();
 

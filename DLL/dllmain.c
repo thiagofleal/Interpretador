@@ -8,7 +8,7 @@ static P_void error_found = NULL;
 
 Result func0(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_file;
 	
@@ -40,7 +40,7 @@ Result func0(Result *_arg, int numArgs)
 
 Result func1(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	const string cmd = _arg[0].value.rt_String;
 	
 	ret.type = type_real;
@@ -51,7 +51,7 @@ Result func1(Result *_arg, int numArgs)
 
 Result func2(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	static Painter paint;
 	
 	paint = new Painter(Tonight.Resources.Color);
@@ -65,7 +65,7 @@ Result func2(Result *_arg, int numArgs)
 
 Result func3(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
@@ -76,7 +76,7 @@ Result func3(Result *_arg, int numArgs)
 
 Result func4(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
@@ -87,7 +87,7 @@ Result func4(Result *_arg, int numArgs)
 
 Result func5(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
@@ -98,7 +98,7 @@ Result func5(Result *_arg, int numArgs)
 
 Result func6(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_real;
 	ret.value.rt_double = (double)Tonight.getKey();
@@ -108,7 +108,7 @@ Result func6(Result *_arg, int numArgs)
 
 Result func7(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_bool;
 	ret.value.rt_bool = Tonight.pressKey();
@@ -118,7 +118,7 @@ Result func7(Result *_arg, int numArgs)
 
 Result func8(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	static Random rand;
 	
 	double arg1 = _arg[0].value.rt_double;
@@ -135,8 +135,8 @@ Result func8(Result *_arg, int numArgs)
 
 Result func9(Result *_arg, int numArgs)
 {
+	static Result ret;
 	string str = _arg[0].value.rt_String, p;
-	Result ret;
 	
 	strtod(str, &p);
 	ret.type = type_bool;
@@ -147,7 +147,7 @@ Result func9(Result *_arg, int numArgs)
 
 Result func10(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_real;
 	ret.value.rt_double = atof(_arg[0].value.rt_String);
@@ -157,7 +157,7 @@ Result func10(Result *_arg, int numArgs)
 
 Result func11(Result *_arg, int numArgs)
 {
-	Result ret;
+	static Result ret;
 	
 	ret.type = type_matrix;
 	ret.value.rt_matrix.dimensions = default_matrix_dimension;
@@ -171,34 +171,52 @@ Result func11(Result *_arg, int numArgs)
 
 Result func12(Result *_arg, int numArgs)
 {
-	Result ret;
-	pointer library;
+	static Result ret;
 	
-	string arg1 = _arg[0].value.rt_String;
-	string arg2 = _arg[1].value.rt_String;
-	
-	Result (*func)(Result*, int);
+	string arg = _arg[0].value.rt_String;
 	
 	ret.type = type_object;
-	ret.value.rt_pointer = NULL;
+	ret.value.rt_pointer = (pointer)LoadLibrary(arg);
 	
-	if(library = LoadLibrary(arg1))
+	return ret;
+}
+
+Result func13(Result *_arg, int numArgs)
+{
+	pointer library = _arg[0].value.rt_pointer;
+	string arg = _arg[1].value.rt_String;
+	Result (* func)(Result*, int);
+	
+	func = (pointer)GetProcAddress(library, arg);
+	
+	if(func)
 	{
-		if(*(pointer*)&func = GetProcAddress(library, arg2))
-		{
-			ret = func(_arg + 2, numArgs - 2);
-		}
-		else
-		{
-			error_found(concat("Não foi possível encontrar a função \"", arg2, "\"", $end));
-		}
-		
-		FreeLibrary(library);
+		return func(_arg + 2, numArgs - 2);
 	}
 	else
 	{
-		error_found(concat("Não foi possível abrir o arquivo \"", arg1, "\"", $end));
+		static Result ret;
+		
+		string error = concat("A função \"", arg, "\" não foi encontrada", $end);
+		error_found(error);
+		free(error);
+		
+		ret.type = type_object;
+		ret.value.rt_pointer = (pointer)-1;
+		
+		return ret;
 	}
+}
+
+Result func14(Result *_arg, int numArgs)
+{
+	static Result ret;
+	pointer library = _arg[0].value.rt_pointer;
+	
+	ret.type = type_void;
+	ret.value.rt_pointer = NULL;
+	
+	FreeLibrary(library);
 	
 	return ret;
 }
@@ -223,4 +241,6 @@ DLLIMPORT void add_std_func(object list)
 	iList.add(list, func10);
 	iList.add(list, func11);
 	iList.add(list, func12);
+	iList.add(list, func13);
+	iList.add(list, func14);
 }

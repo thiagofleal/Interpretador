@@ -169,46 +169,65 @@ Result func11(Result *_arg, int numArgs)
 	return ret;
 }
 
+
 Result func12(Result *_arg, int numArgs)
 {
-	Result ret;
-	pointer library;
+	static Result ret;
 	
-	string arg1 = _arg[0].value.rt_String;
-	string arg2 = _arg[1].value.rt_String;
+	string arg = _arg[0].value.rt_String;
 	
-	ret.type = type_null;
-	ret.value.rt_pointer = NULL;
-	
-	if((library = dlopen(arg1, RTLD_LAZY)))
-	{
-		Result (*func)(Result*, int);
-		
-		if(((*(pointer*)&func) = dlsym(library, arg2)))
-		{
-			ret = func(_arg + 2, numArgs - 2);
-		}
-		else
-		{
-			error_found(concat("Não foi possível encontrar a função \"", arg2, "\"", $end));
-		}
-		
-		dlclose(library);
-	}
-	else
-	{
-		error_found(concat("Não foi possível abrir o arquivo \"", arg1, "\"", $end));
-	}
+	ret.type = type_object;
+	ret.value.rt_pointer = (pointer)dlopen(arg, RTLD_LAZY);
 	
 	return ret;
 }
 
-void set_error_function(P_void function)
+Result func13(Result *_arg, int numArgs)
+{
+	pointer library = _arg[0].value.rt_pointer;
+	string arg = _arg[1].value.rt_String;
+	Result (* func)(Result*, int);
+	
+	func = (pointer)dlsym(library, arg);
+	
+	if(func)
+	{
+		return func(_arg + 2, numArgs - 2);
+	}
+	else
+	{
+		static Result ret;
+		
+		string error = concat("A função \"", arg, "\" não foi encontrada", $end);
+		error_found(error);
+		free(error);
+		
+		ret.type = type_object;
+		ret.value.rt_pointer = (pointer)-1;
+		
+		return ret;
+	}
+}
+
+Result func14(Result *_arg, int numArgs)
+{
+	static Result ret;
+	pointer library = _arg[0].value.rt_pointer;
+	
+	ret.type = type_void;
+	ret.value.rt_pointer = NULL;
+	
+	dlclose(library);
+	
+	return ret;
+}
+
+DLLIMPORT void set_error_function(P_void function)
 {
 	error_found = function;
 }
 
-void add_std_func(object list)
+DLLIMPORT void add_std_func(object list)
 {
 	iList.add(list, func0);
 	iList.add(list, func1);
@@ -223,4 +242,6 @@ void add_std_func(object list)
 	iList.add(list, func10);
 	iList.add(list, func11);
 	iList.add(list, func12);
+	iList.add(list, func13);
+	iList.add(list, func14);
 }
