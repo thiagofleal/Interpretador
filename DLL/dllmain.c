@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <windows.h>
 #include <Tonight\tonight.h>
 #include <Tonight\list.h>

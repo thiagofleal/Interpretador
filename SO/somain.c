@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <dlfcn.h>
 #include <Tonight/tonight.h>
 #include <Tonight/list.h>

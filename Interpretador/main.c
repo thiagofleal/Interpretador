@@ -275,8 +275,8 @@ int main(int argc, string argv[])
 	finally
 	{
 		Tonight.getKey();
-		return EXIT_FAILURE;
+		return Exit.Failure;
 	}
 	
-	return EXIT_SUCCESS;
+	return Exit.Success;
 }
