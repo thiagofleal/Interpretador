@@ -324,7 +324,7 @@ void exec_try(void)
 	register int i, bk_ind_var = ind_var;
 	jmp_buf buf, *bk = except.p_jmp_buf;
 	Token * begin = token;
-	Variable * bk_var = new Memory(ind_var * sizeof(Variable));
+	Variable * bk_var = Memory.alloc(ind_var * sizeof(Variable));
 	p_Object bk_this = _this, bk_virtual = _virtual;
 	
 	for(i = 0; i < ind_var; i++)
@@ -368,6 +368,7 @@ void exec_try(void)
 				token_expected(tok_pontuation, ")");
 				ctrl = false;
 				interp_block();
+				Memory.free(except.thrown);
 			}
 			else
 			{
@@ -397,7 +398,7 @@ void exec_try(void)
 		except.p_jmp_buf = bk;
 	}
 	
-	free(bk_var);
+	Memory.free(bk_var);
 }
 
 void exec_throw(void)
@@ -411,7 +412,7 @@ void exec_throw(void)
 
 void runtime_error(int value)
 {
-	free(runtime_error_detected[index_error_value].value);
+	Memory.free(runtime_error_detected[index_error_value].value);
 	runtime_error_detected[index_error_value].value = s_is(value);
 	token = runtime_error_detected;
 	interp_block();

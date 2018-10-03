@@ -24,7 +24,7 @@ void attrib(pointer dest, int type, Result * r)
 		case type_string:
 			if(*(string*)dest)
 			{
-				free(*(string*)dest);
+				Memory.free(*(string*)dest);
 			}
 			if(r->value.rt_String)
 				*(string*)dest = toString(r->value.rt_String);

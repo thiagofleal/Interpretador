@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "header.h"
@@ -131,9 +133,9 @@ static void expText(Result *r)
 				break;
 			}
 		}
-		r->value.rt_String = concat(str1, str2, $end);
-		free(str1);
-		free(str2);
+		r->value.rt_String = nconcat(strlen(str1) + strlen(str2), str1, str2, $end);
+		Memory.free(str1);
+		Memory.free(str2);
 		r->type = type_string;
 		
 		++ token;
@@ -248,23 +250,23 @@ static void expRelac(Result *r)
 				{
 					case op_equal:
 						res = (strcmp(r->value.rt_String, sr.value.rt_String) ? false : true);
-						free(r->value.rt_String);
-						free(sr.value.rt_String);
+						Memory.free(r->value.rt_String);
+						Memory.free(sr.value.rt_String);
 						break;
 					case op_differ:
 						res = (strcmp(r->value.rt_String, sr.value.rt_String) ? true : false);
-						free(r->value.rt_String);
-						free(sr.value.rt_String);
+						Memory.free(r->value.rt_String);
+						Memory.free(sr.value.rt_String);
 						break;
 					case op_str_equal:
 						res = equal(r->value.rt_String, sr.value.rt_String);
-						free(r->value.rt_String);
-						free(sr.value.rt_String);
+						Memory.free(r->value.rt_String);
+						Memory.free(sr.value.rt_String);
 						break;
 					case op_str_equal_not_identic:
 						res = equal(r->value.rt_String, sr.value.rt_String) && strcmp(r->value.rt_String, sr.value.rt_String);
-						free(r->value.rt_String);
-						free(sr.value.rt_String);
+						Memory.free(r->value.rt_String);
+						Memory.free(sr.value.rt_String);
 						break;
 					default:
 						error_found("Operador relacional inválido para textos");
@@ -503,7 +505,7 @@ static void expElement(Result *r)
 					{
 						str_err = concat(
 							"A classe \"",
-							&_virtual->p_class->name[0],
+							&_virtual->p_class->name,
 							"\" não possui o método/atributo \"",
 							name,
 							"\"", $end
@@ -523,7 +525,7 @@ static void expElement(Result *r)
 			if(str_err)
 			{
 				error_found(str_err);
-				free(str_err);
+				Memory.free(str_err);
 			}
 		}
 		else
@@ -628,14 +630,14 @@ p_Object instance_class(Class * p_class)
 	
 	_new->p_class = p_class;
 	_new->base_object = instance_class(p_class->p_base);
-	_new->attr = new Memory(p_class->n_attr * sizeof(Attribute));
+	_new->attr = Memory.alloc(p_class->n_attr * sizeof(Attribute));
 	
 	for(i = 0; i < p_class->n_attr; i++)
 	{
 		_new->attr[i].id = p_class->attr[i].id;
 		_new->attr[i].mode = p_class->attr[i].mode;
 		_new->attr[i].type = p_class->attr[i].type;
-		_new->attr[i].value = new Memory(var_inf[p_class->attr[i].type - type_char].size);
+		_new->attr[i].value = malloc(var_inf[p_class->attr[i].type - type_char].size);
 		memcpy(_new->attr[i].value, p_class->attr[i].value, var_inf[p_class->attr[i].type - type_char].size);
 	}
 	
@@ -707,7 +709,7 @@ static void expValue(Result *r)
 					}
 					if(token->intern == kw_Classe)
 					{
-						Class * id = new Memory(sizeof(Class));
+						Class * id = Memory.alloc(sizeof(Class));
 						p_Object obj;
 						
 						declare_class(&unknow_class);
@@ -718,7 +720,7 @@ static void expValue(Result *r)
 						{
 							string str_err = concat("A classe \"", token->value, "\" não foi declarada", $end);
 							error_found(str_err);
-							free(str_err);
+							Memory.free(str_err);
 						}
 						
 						exec_method(&id->constructor, obj);
@@ -733,7 +735,7 @@ static void expValue(Result *r)
 						{
 							string str_err = concat("A classe \"", token->value, "\" não foi declarada", $end);
 							error_found(str_err);
-							free(str_err);
+							Memory.free(str_err);
 						}
 						
 						exec_method(&id->constructor, obj);
@@ -789,7 +791,7 @@ static void expValue(Result *r)
 				{
 					string str = concat("A função \"", token->value, "\" não foi declarada", $end);
 					error_found(str);
-					free(str);
+					Memory.free(str);
 				}
 				
 				exec_func(f);
@@ -806,7 +808,7 @@ static void expValue(Result *r)
 				{
 					string str = concat("A variável \"", token->value, "\" não foi declarada", $end);
 					error_found(str);
-					free(str);
+					Memory.free(str);
 					return;
 				}
 				attrib_result(r, v->value, v->type);

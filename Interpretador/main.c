@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include "header.h"
@@ -83,7 +84,7 @@ bool token_expected(int type, string value)
 			" \"", value, "\" após \"", (token - 1)->value, "\"", $end
 		);
 		error_found(str_err);
-		free(str_err);
+		Memory.free(str_err);
 		return false;
 	}
 }
@@ -92,7 +93,7 @@ void free_var(Variable * var)
 {
 	if(var->type == type_string)
 	{
-		free(*(string*)var->value);
+		Memory.free(*(string*)var->value);
 	}
 	
 	free(var->value);
@@ -120,7 +121,7 @@ string $throws open_file(string name)
 	{
 		string error = concat("Não foi possível abrir o arquivo \"", name, "\"", $end);
 		error_found(error);
-		free(error);
+		Memory.free(error);
 	}
 	catch(InputException)
 	{}

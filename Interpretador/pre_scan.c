@@ -128,7 +128,7 @@ void declare_class(Token * id_class)
 						{
 							string str_err = concat("A classe \"", token->value, "\" não foi declarada", $end);
 							error_found(str_err);
-							free(str_err);
+							Memory.free(str_err);
 						}
 						
 						_class[ind_class - 1].p_base = p_base;

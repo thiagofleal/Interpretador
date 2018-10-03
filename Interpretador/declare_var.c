@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "header.h"
 
 extern void error_found(string);

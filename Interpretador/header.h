@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #ifdef _WIN32
 #	include <Tonight\tonight.h>
 #	ifdef INCLUDE_LIST

@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include "header.h"
 
@@ -169,7 +170,7 @@ Result * redirect_program(Token * enter, P_void func, pointer arg)
 	register int i, bk_ind_var = ind_var;
 	Token * bk_tok = NULL;
 	static Result * ret;
-	Variable * bk_var = new Memory((ind_var - ind_glob) * sizeof(Variable));
+	Variable * bk_var = Memory.alloc((ind_var - ind_glob) * sizeof(Variable));
 	
 	for(i = ind_glob; i < ind_var; i++)
 	{
@@ -196,7 +197,7 @@ Result * redirect_program(Token * enter, P_void func, pointer arg)
 		_var[ind_var ++] = bk_var[i];
 	}
 	
-	free(bk_var);
+	Memory.free(bk_var);
 	return ret;
 }
 

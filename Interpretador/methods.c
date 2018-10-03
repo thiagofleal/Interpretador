@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include "header.h"
@@ -202,7 +204,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 				s = toString(_arg[0].value.rt_String);
 				break;
 			default:
-				s = new Memory(sizeof(char) * 17);
+				s = Memory.alloc(sizeof(char) * 17);
 				sprintf(s, "%p", _arg[0].value.rt_pointer);
 				break;
 		}
@@ -217,7 +219,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		r->type = type_void;
 		r->value.rt_pointer = NULL;
 		
-		free(s);
+		Memory.free(s);
 	}
 	else if(_meth_id == method(descarregar))
 	{
@@ -323,7 +325,7 @@ bool methods_Texto(Result * r, int _meth_id)
 			r->value.rt_double = 0.0;
 		}
 		
-		free(str);
+		Memory.free(str);
 	}
 	else if(_meth_id == method(formatar))
 	{
@@ -331,14 +333,13 @@ bool methods_Texto(Result * r, int _meth_id)
 		
 		r->type = type_string;
 		r->value.rt_String = format_string(str, _arg, nargs);
-		
-		free(str);
+		Memory.free(str);
 	}
 	else if(_meth_id == method(tamanho))
 	{
 		r->type = type_real;
 		r->value.rt_double = (double)strlen(str);
-		free(str);
+		Memory.free(str);
 	}
 	else
 	{
@@ -397,7 +398,7 @@ void delete_object(p_Object obj)
 		free_var((Variable*)(obj->attr + i));
 	}
 	
-	free(obj->attr);
+	Memory.free(obj->attr);
 	obj->attr = NULL;
 	obj->p_class = NULL;
 	free(obj);
@@ -462,7 +463,7 @@ bool methods_Objeto(Result * r, int _meth_id)
 		{
 			string str = concat("A classe \"", name, "\" não possui o método \"", token->value, "\"", $end);
 			error_found(str);
-			free(str);
+			Memory.free(str);
 			return false;
 		}
 		
@@ -480,7 +481,7 @@ bool methods_Objeto(Result * r, int _meth_id)
 		{
 			string str = concat("A classe \"", name, "\" não possui o atributo \"", token->value, "\"", $end);
 			error_found(str);
-			free(str);
+			Memory.free(str);
 			return false;
 		}
 		attrib_result(r, a->value, a->type);

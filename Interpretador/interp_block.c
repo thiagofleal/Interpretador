@@ -101,7 +101,7 @@ Result * interp_block(void)
 				
 				if(res.type == type_string)
 				{
-					free(res.value.rt_String);
+					Memory.free(res.value.rt_String);
 				}
 		}
 	

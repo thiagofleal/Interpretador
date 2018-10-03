@@ -1,5 +1,6 @@
 #define INCLUDE_LIST
 
+#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include "header.h"
@@ -129,6 +130,11 @@ static int reserved(string word)
 	return 0;
 }
 
+static INLINE unsigned int identifier(int i)
+{
+	return (i + 1) + int_identifier;
+}
+
 unsigned int intern_identifier(string id)
 {
 	register int i = 0, size;
@@ -139,12 +145,12 @@ unsigned int intern_identifier(string id)
 	{
 		if(!strcmp(id, iList.get(idList, i)))
 		{
-			return (unsigned int)((i + 1) + int_identifier);
+			return identifier(i);
 		}
 	}
 	
 	iList.add(idList, toString(id));
-	return (unsigned int)((i + 1) + int_identifier);
+	return identifier(i);
 }
 
 void init_list(void)
@@ -165,7 +171,7 @@ void delete_list(void)
 		{
 			p = iList.get(idList, 0);
 			iList.remove(idList, 0);
-			free(p);
+			Memory.free(p);
 		}
 		
 		delete(idList);
@@ -220,7 +226,7 @@ static Token nextToken(void)
 	if(strchr("(){};:,", * p_prog))
 	{
 		ret.type = tok_pontuation;
-		ret.value = new Memory(sizeof(char) * 2);
+		ret.value = Memory.alloc(sizeof(char) * 2);
 		ret.value[0] = *p_prog;
 		ret.value[1] = 0;
 		++ p_prog;
@@ -232,9 +238,7 @@ static Token nextToken(void)
 	{
 		++ p_prog;
 		ret.type = tok_character;
-		ret.value = new Memory(sizeof(char) * 2);
-		ret.value[0] = character();
-		ret.value[1] = 0;
+		ret.value = new Char(character());
 		++ p_prog;
 		if(*p_prog != '\'')
 			fprintf(stderr, "\t-> Erro: Esperado aspas simples(\"'\") após \"%c\"\n", *ret.value);
@@ -599,12 +603,12 @@ Token * $throws tokenMaker(string _File, string prog)
 	do
 	{
 		tok = nextToken();
-		free(tok.value);
+		Memory.free(tok.value);
 		++ num_tok;
 	}
 	while(tok.type != tok_eof);
 	
-	p_ret = ret = new Memory(num_tok * sizeof(Token));
+	p_ret = ret = Memory.alloc(num_tok * sizeof(Token));
 	p_prog = begin;
 	
 	do
