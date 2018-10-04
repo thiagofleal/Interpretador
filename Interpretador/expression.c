@@ -83,6 +83,14 @@ double stod(string str)
 	return value;
 }
 
+static string cat(string s1, string s2)
+{
+	string ret = Memory.alloc(Memory.size(s1) + Memory.size(s2) - 1);
+	memcpy(ret, s1, Memory.size(s1) / sizeof(char));
+	memcpy(ret + (Memory.size(s1) - 1) / sizeof(char), s2, Memory.size(s2) / sizeof(char));
+	return ret;
+}
+
 Result expression(void)
 {
 	Result result = {};
@@ -133,7 +141,7 @@ static void expText(Result *r)
 				break;
 			}
 		}
-		r->value.rt_String = nconcat(strlen(str1) + strlen(str2), str1, str2, $end);
+		r->value.rt_String = cat(str1, str2);
 		Memory.free(str1);
 		Memory.free(str2);
 		r->type = type_string;
