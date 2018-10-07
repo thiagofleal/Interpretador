@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <dlfcn.h>
 #include <Tonight/tonight.h>
 #include <Tonight/list.h>
@@ -201,7 +202,7 @@ Result func13(Result *_arg, int numArgs)
 		
 		string error = concat("A função \"", arg, "\" não foi encontrada", $end);
 		error_found(error);
-		free(error);
+		Memory.free(error);
 		
 		ret.type = type_object;
 		ret.value.rt_pointer = (pointer)-1;
@@ -223,12 +224,12 @@ Result func14(Result *_arg, int numArgs)
 	return ret;
 }
 
-DLLIMPORT void set_error_function(P_void function)
+void set_error_function(P_void function)
 {
 	error_found = function;
 }
 
-DLLIMPORT void add_std_func(object list)
+void add_std_func(object list)
 {
 	iList.add(list, func0);
 	iList.add(list, func1);

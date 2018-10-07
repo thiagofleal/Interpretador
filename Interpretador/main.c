@@ -109,7 +109,7 @@ string $throws open_file(string name)
 	
 	try
 	{
-		arq = new File(name, "r");
+		arq = File.open(name, File.Mode.read);
 		
 		while(true)
 		{
@@ -141,7 +141,7 @@ string $throws open_file(string name)
 		* -- prog = 0;
 	}
 	
-	fclose(arq);
+	File.close(arq);
 	return begin;
 }
 
