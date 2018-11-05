@@ -362,6 +362,7 @@ bool methods_Matriz(Result * r, int _meth_id)
 	{
 		expected_arguments(0, 0);
 		free(mtrx.value);
+		mtrx.length = 0;
 		
 		r->type = type_void;
 		r->value.rt_pointer = NULL;

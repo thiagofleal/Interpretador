@@ -104,7 +104,7 @@ string $throws open_file(string name)
 	Scanner read = new Scanner(Tonight.Std.File.Input);
 	
 	int num_char = 0;
-	char *prog, *begin;
+	string prog, begin;
 	file arq;
 	
 	try
@@ -126,7 +126,7 @@ string $throws open_file(string name)
 	catch(InputException)
 	{}
 	
-	rewind(arq);
+	File.rewind(arq);
 	prog = begin = Array.Char(num_char);
 	
 	try
@@ -150,23 +150,28 @@ string get_library_path(string argv)
 	int i, j;
 	string interp = interpreter_name;
 	string library = library_folder;
-	string url_library = Array.Char(strlen(argv) - strlen(interp) + strlen(library) + 1);
+	string ret;
+	char ARRAY url_library = Array.Char(
+		String.length(argv) - String.length(interp) + String.length(library) + 1
+	);
 	
-	for(i = 0; i < strlen(argv) - strlen(interp); i++)
+	for(i = 0; i < String.length(argv) - String.length(interp); i++)
 	{
 		url_library[i] = argv[i];
 	}
-	for(j = i; i < j + strlen(library); i++)
+	for(j = i; i < j + String.length(library); i++)
 	{
 		url_library[i] = library[i - j];
 	}
 	url_library[i] = '\0';
-	return url_library;
+	ret = toString(url_library);
+	Array.free(url_library);
+	return ret;
 }
 
 int main(int argc, string argv[])
 {
-	Writer error = new Writer(Tonight.Std.Error);
+	Writer error = new Writer(Tonight.Std.Error.Output);
 	
 	string prog, library;
 	Function * f;

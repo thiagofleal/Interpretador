@@ -1,0 +1,11 @@
+*.o
+*.a
+*.lib
+*.dev
+*.layout
+*.win
+*.exe
+*_private.*
+*.rc
+*.res
+*.ico

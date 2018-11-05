@@ -9,8 +9,8 @@ Interpretador para a linguagem X - pt/br
 * Linguagem: C
 * Frameworks: [Tonight](https://github.com/thiagofleal/Tonight), [Tonight/List](https://github.com/thiagofleal/List)
 * Link:
- >* Linux: -ltonight -llist ../SO/sointerp.so
- >* Windows: -ltonight -llist ..\DLL\dllinterp.dll
+ >* Linux: -ltonight ../SO/sointerp.so
+ >* Windows: -ltonight ..\DLL\dllinterp.dll
 
  ## Linguagem X
 

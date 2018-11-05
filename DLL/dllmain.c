@@ -229,19 +229,19 @@ DLLIMPORT void set_error_function(P_void function)
 
 DLLIMPORT void add_std_func(object list)
 {
-	iList.add(list, func0);
-	iList.add(list, func1);
-	iList.add(list, func2);
-	iList.add(list, func3);
-	iList.add(list, func4);
-	iList.add(list, func5);
-	iList.add(list, func6);
-	iList.add(list, func7);
-	iList.add(list, func8);
-	iList.add(list, func9);
-	iList.add(list, func10);
-	iList.add(list, func11);
-	iList.add(list, func12);
-	iList.add(list, func13);
-	iList.add(list, func14);
+	$(List) -> add(list, func0);
+	$(List) -> add(list, func1);
+	$(List) -> add(list, func2);
+	$(List) -> add(list, func3);
+	$(List) -> add(list, func4);
+	$(List) -> add(list, func5);
+	$(List) -> add(list, func6);
+	$(List) -> add(list, func7);
+	$(List) -> add(list, func8);
+	$(List) -> add(list, func9);
+	$(List) -> add(list, func10);
+	$(List) -> add(list, func11);
+	$(List) -> add(list, func12);
+	$(List) -> add(list, func13);
+	$(List) -> add(list, func14);
 }

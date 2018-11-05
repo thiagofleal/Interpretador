@@ -156,7 +156,7 @@ void initFileList(void)
 {
 	if(!fileList)
 	{
-		fileList = new Object(List);
+		fileList = new Object(List.class);
 	}
 }
 
@@ -173,7 +173,7 @@ static void registerFile(string _file)
 {
 	if(fileList)
 	{
-		iList.add(fileList, _file);
+		$(List)->add(fileList, _file);
 	}
 }
 
@@ -181,11 +181,11 @@ bool checkFile(string _file)
 {
 	if(fileList)
 	{
-		register int i, size = iList.size(fileList);
+		register int i, size = $(List)->size(fileList);
 		
 		for(i = 0; i < size; i++)
 		{
-			if(!strcmp(iList.get(fileList, i), _file))
+			if(!strcmp($(List)->get(fileList, i), _file))
 			{
 				return true;
 			}

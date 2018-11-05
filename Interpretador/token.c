@@ -139,17 +139,17 @@ unsigned int intern_identifier(string id)
 {
 	register int i = 0, size;
 	
-	size = iList.size(idList);
+	size = $(List)->size(idList);
 	
 	for(; i < size; i++)
 	{
-		if(!strcmp(id, iList.get(idList, i)))
+		if(!strcmp(id, $(List)->get(idList, i)))
 		{
 			return identifier(i);
 		}
 	}
 	
-	iList.add(idList, toString(id));
+	$(List)->add(idList, toString(id));
 	return identifier(i);
 }
 
@@ -157,7 +157,7 @@ void init_list(void)
 {
 	if(!idList)
 	{
-		idList = new Object(List);
+		idList = new Object(List.class);
 	}
 }
 
@@ -167,10 +167,10 @@ void delete_list(void)
 	{
 		pointer p;
 		
-		while(iList.size(idList))
+		while($(List)->size(idList))
 		{
-			p = iList.get(idList, 0);
-			iList.remove(idList, 0);
+			p = $(List)->get(idList, 0);
+			$(List)->remove(idList, 0);
 			Memory.free(p);
 		}
 		

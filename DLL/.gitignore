@@ -1,0 +1,9 @@
+*.o
+*.a
+*.lib
+*.dev
+*.layout
+*.win
+*.dll
+*.def
+*.gch
