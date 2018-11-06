@@ -104,7 +104,7 @@ string $throws open_file(string name)
 	Scanner read = new Scanner(Tonight.Std.File.Input);
 	
 	int num_char = 0;
-	string prog, begin;
+	char *prog, *begin;
 	file arq;
 	
 	try
@@ -126,7 +126,7 @@ string $throws open_file(string name)
 	catch(InputException)
 	{}
 	
-	File.rewind(arq);
+	rewind(arq);
 	prog = begin = Array.Char(num_char);
 	
 	try
@@ -150,23 +150,18 @@ string get_library_path(string argv)
 	int i, j;
 	string interp = interpreter_name;
 	string library = library_folder;
-	string ret;
-	char ARRAY url_library = Array.Char(
-		String.length(argv) - String.length(interp) + String.length(library) + 1
-	);
+	string url_library = Array.Char(strlen(argv) - strlen(interp) + strlen(library) + 1);
 	
-	for(i = 0; i < String.length(argv) - String.length(interp); i++)
+	for(i = 0; i < strlen(argv) - strlen(interp); i++)
 	{
 		url_library[i] = argv[i];
 	}
-	for(j = i; i < j + String.length(library); i++)
+	for(j = i; i < j + strlen(library); i++)
 	{
 		url_library[i] = library[i - j];
 	}
 	url_library[i] = '\0';
-	ret = toString(url_library);
-	Array.free(url_library);
-	return ret;
+	return url_library;
 }
 
 int main(int argc, string argv[])
@@ -178,7 +173,15 @@ int main(int argc, string argv[])
 	Result *ret = NULL;
 	jmp_buf buf;
 	
-	Tonight.locale();
+	Locale.category = Locale.Category.Collate;
+	Locale.set();
+	Locale.category = Locale.Category.Monetary;
+	Locale.set();
+	Locale.category = Locale.Category.Numeric;
+	Locale.set();
+	Locale.category = Locale.Category.Time;
+	Locale.set();
+	
 	Tonight.initRandom();
 	
 	try
