@@ -10,7 +10,7 @@ void attrib(pointer dest, int type, Result * r)
 	switch(type)
 	{
 		case type_char:
-			*(char*)dest = (char)r->value.rt_double;
+			*(u_char*)dest = (u_char)r->value.rt_double;
 			return;
 		case type_bool:
 			*(bool*)dest = r->value.rt_bool;
@@ -111,7 +111,7 @@ void attrib_result(Result * r, pointer v, int type)
 	switch(r->type = type)
 	{
 		case type_char:
-			r->value.rt_double = (double)(*(char*)v);
+			r->value.rt_double = (double)(*(u_char*)v);
 			break;
 		case type_bool:
 			r->value.rt_bool = *(bool*)v;

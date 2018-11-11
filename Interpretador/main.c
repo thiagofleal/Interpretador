@@ -104,7 +104,7 @@ string $throws open_file(string name)
 	Scanner read = new Scanner(Tonight.Std.File.Input);
 	
 	int num_char = 0;
-	char *prog, *begin;
+	string prog, begin;
 	file arq;
 	
 	try
@@ -120,8 +120,8 @@ string $throws open_file(string name)
 	catch(FileOpenException)
 	{
 		string error = concat("Não foi possível abrir o arquivo \"", name, "\"", $end);
-		error_found(error);
-		Memory.free(error);
+		error_found(Tonight.ASCII.normalizeString(error));
+		String.free(error);
 	}
 	catch(InputException)
 	{}
@@ -264,17 +264,25 @@ int main(int argc, string argv[])
 	}
 	catch(FileOpenException)
 	{
-		error.println("Não foi possível abrir o arquivo...\nstrerror(): ", strerror(errno), $end);
+		string err = concat("Não foi possível abrir o arquivo...\nstrerror(): ", strerror(errno), $end);
+		error.textln(Tonight.ASCII.normalizeString(err));
+		String.free(err);
 	}
 	catch(InterpreterException)
 	{
 		Exception e = getException();
-		error.printargln(Error(e), Message(e), $end);
+		string err = concat(Error(e), "\n", Message(e), $end);
+		
+		error.textln(Tonight.ASCII.normalizeString(err));
+		String.free(err);
 	}
 	catch(GenericException)
 	{
 		Exception e = getException();
-		error.println("Erro inesperado: ", Error(e), "\nMensagem de erro: ", Message(e), $end);
+		string err = concat("Erro inesperado: ", Error(e), "\nMensagem de erro: ",Message(e), $end);
+		
+		error.textln(Tonight.ASCII.normalizeString(err));
+		String.free(err);
 		
 		if(errno)
 		{

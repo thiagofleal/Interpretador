@@ -9,7 +9,7 @@ static char *p_prog, *begin;
 static string _file;
 static object idList = NULL;
 
-static char character(void)
+static u_char character(void)
 {
 	if(*p_prog == '\\')
 	{
@@ -38,7 +38,7 @@ static char character(void)
 			case '8':
 			case '9':
 			{
-				char c = (char)strtol(p_prog, &p_prog, 10);
+				u_char c = (char)strtol(p_prog, &p_prog, 10);
 				-- p_prog;
 				return c;
 			}
@@ -567,7 +567,7 @@ static Token nextToken(void)
 		}
 		v[i] = 0;
 		++ p_prog;
-		ret.value = toString(v);
+		ret.value = Tonight.ASCII.normalizeString(toString(v));
 		Array.free(v);
 		return ret;
 	}
