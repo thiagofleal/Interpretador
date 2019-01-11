@@ -405,7 +405,7 @@ void exec_throw(void)
 {
 	token_expected(tok_pontuation, ":");
 	++ token;
-	except.thrown = new Pointer(expression().value.rt_pointer);
+	except.thrown = New.Pointer(expression().value.rt_pointer);
 	token_expected(tok_pontuation, ";");
 	longjmp(*except.p_jmp_buf, 1);
 }

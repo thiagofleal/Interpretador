@@ -13,7 +13,7 @@ extern str_variable var_inf[];
 extern Variable _var[];
 extern Function _func[];
 extern Result _arg[];
-extern Class _class[];
+extern strClass _class[];
 
 int count_dimensions(void)
 {

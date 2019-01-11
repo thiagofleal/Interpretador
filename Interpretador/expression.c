@@ -20,7 +20,7 @@ extern int arguments(void);
 extern Result exec_execute(void);
 extern Variable * find_var(unsigned int);
 extern Function * find_func(unsigned int);
-extern Class * find_class(unsigned int);
+extern strClass * find_class(unsigned int);
 
 extern int ind_var, ind_func, ind_arg, ind_class;
 extern Token *token, unknow_class;
@@ -29,7 +29,7 @@ extern str_variable var_inf[];
 extern Variable _var[];
 extern Function _func[];
 extern Result _arg[];
-extern Class _class[];
+extern strClass _class[];
 extern string library_path;
 
 static void expText(Result*);
@@ -626,7 +626,7 @@ void create_matrix(str_matrix * matrix, int type, int dimensions, int *length)
 	}
 }
 
-p_Object instance_class(Class * p_class)
+p_Object instance_class(strClass * p_class)
 {
 	register int i;
 	p_Object _new = malloc(sizeof(str_Object));
@@ -717,11 +717,11 @@ static void expValue(Result *r)
 					}
 					if(token->intern == kw_Classe)
 					{
-						Class * id = Memory.alloc(sizeof(Class));
+						strClass * id = Memory.alloc(sizeof(strClass));
 						p_Object obj;
 						
 						declare_class(&unknow_class);
-						memcpy(id, _class + -- ind_class, sizeof(Class));
+						memcpy(id, _class + -- ind_class, sizeof(strClass));
 						obj = instance_class(id);
 						
 						if(!obj)
@@ -736,7 +736,7 @@ static void expValue(Result *r)
 					}
 					if(token->type == tok_identifier)
 					{
-						Class * id = find_class(token->intern);
+						strClass * id = find_class(token->intern);
 						p_Object obj = instance_class(id);
 						
 						if(!obj)

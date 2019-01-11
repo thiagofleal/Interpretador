@@ -8,7 +8,7 @@ extern bool token_expected(int, string);
 extern string $throws open_file(string);
 extern Result expression(void);
 extern Token * tokenMaker(string, string);
-extern Class * find_class(unsigned int);
+extern strClass * find_class(unsigned int);
 
 extern int ind_var, ind_func, ind_arg, ind_class;
 extern Token *token, *default_constructor, *default_destructor;
@@ -16,7 +16,7 @@ extern Token *token, *default_constructor, *default_destructor;
 extern Variable _var[];
 extern Function _func[];
 extern Result _arg[];
-extern Class _class[];
+extern strClass _class[];
 
 void pre_scan(void);
 
@@ -118,7 +118,7 @@ void declare_class(Token * id_class)
 						break;
 					case kw_Herdar:
 					{
-						Class * p_base;
+						strClass * p_base;
 						
 						token_expected(tok_pontuation, ":");
 						++ token;
@@ -156,7 +156,7 @@ void initFileList(void)
 {
 	if(!fileList)
 	{
-		fileList = new Object(List.class);
+		fileList = new(List.class);
 	}
 }
 
@@ -173,7 +173,7 @@ static void registerFile(string _file)
 {
 	if(fileList)
 	{
-		$(List)->add(fileList, _file);
+		$(fileList $as List).add(_file);
 	}
 }
 
@@ -181,11 +181,11 @@ bool checkFile(string _file)
 {
 	if(fileList)
 	{
-		register int i, size = $(List)->size(fileList);
+		register int i, size = $(fileList $as List).size();
 		
 		for(i = 0; i < size; i++)
 		{
-			if(!strcmp($(List)->get(fileList, i), _file))
+			if(!strcmp($(fileList $as List).get(i), _file))
 			{
 				return true;
 			}

@@ -28,7 +28,7 @@ std_function ARRAY stdfun;
 Variable _var[num_var];
 Function _func[num_func];
 Result _arg[num_arg];
-Class _class[num_class];
+strClass _class[num_class];
 
 str_variable var_inf[] = {
 	{type_char, sizeof(char)},
@@ -45,7 +45,7 @@ str_variable var_inf[] = {
 
 int meth_id[meth_id_number];
 
-Define_Exception(InterpreterException, "Erro na execução do código", GenericException);
+Define_Exception(InterpreterException $as "Erro na execução do código" $extends GenericException);
 
 void error_found(string str)
 {
@@ -101,7 +101,7 @@ void free_var(Variable * var)
 
 string $throws open_file(string name)
 {
-	Scanner read = new Scanner(Tonight.Std.File.Input);
+	Scanner read = New.Scanner(Tonight.Std.File.Input);
 	
 	int num_char = 0;
 	string prog, begin;
@@ -120,7 +120,7 @@ string $throws open_file(string name)
 	catch(FileOpenException)
 	{
 		string error = concat("Não foi possível abrir o arquivo \"", name, "\"", $end);
-		error_found(Tonight.ASCII.normalizeString(error));
+		error_found(error);
 		String.free(error);
 	}
 	catch(InputException)
@@ -166,21 +166,26 @@ string get_library_path(string argv)
 
 int main(int argc, string argv[])
 {
-	Writer error = new Writer(Tonight.Std.Error.Output);
+	Writer error = New.Writer(Tonight.Std.Error.Output);
 	
 	string prog, library;
 	Function * f;
 	Result *ret = NULL;
 	jmp_buf buf;
+	struct Locale Locale;
 	
-	Locale.category = Locale.Category.Collate;
-	Locale.set();
-	Locale.category = Locale.Category.Monetary;
-	Locale.set();
-	Locale.category = Locale.Category.Numeric;
-	Locale.set();
-	Locale.category = Locale.Category.Time;
-	Locale.set();
+	using(Locale $as Tonight.Locale)
+	{
+		Locale.setName("");
+		Locale.setCategory(Locale.Category.Collate);
+		Locale.set();
+		Locale.setCategory(Locale.Category.Monetary);
+		Locale.set();
+		Locale.setCategory(Locale.Category.Numeric);
+		Locale.set();
+		Locale.setCategory(Locale.Category.Time);
+		Locale.set();
+	}
 	
 	Tonight.initRandom();
 	
@@ -265,7 +270,7 @@ int main(int argc, string argv[])
 	catch(FileOpenException)
 	{
 		string err = concat("Não foi possível abrir o arquivo...\nstrerror(): ", strerror(errno), $end);
-		error.textln(Tonight.ASCII.normalizeString(err));
+		error.textln(err);
 		String.free(err);
 	}
 	catch(InterpreterException)
@@ -273,7 +278,7 @@ int main(int argc, string argv[])
 		Exception e = getException();
 		string err = concat(Error(e), "\n", Message(e), $end);
 		
-		error.textln(Tonight.ASCII.normalizeString(err));
+		error.textln(err);
 		String.free(err);
 	}
 	catch(GenericException)
@@ -281,7 +286,7 @@ int main(int argc, string argv[])
 		Exception e = getException();
 		string err = concat("Erro inesperado: ", Error(e), "\nMensagem de erro: ",Message(e), $end);
 		
-		error.textln(Tonight.ASCII.normalizeString(err));
+		error.textln(err);
 		String.free(err);
 		
 		if(errno)

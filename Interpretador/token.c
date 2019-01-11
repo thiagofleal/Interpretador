@@ -139,17 +139,17 @@ unsigned int intern_identifier(string id)
 {
 	register int i = 0, size;
 	
-	size = $(List)->size(idList);
+	size = $(idList $as List).size();
 	
 	for(; i < size; i++)
 	{
-		if(!strcmp(id, $(List)->get(idList, i)))
+		if(!strcmp(id, $(idList $as List).get(i)))
 		{
 			return identifier(i);
 		}
 	}
 	
-	$(List)->add(idList, toString(id));
+	$(idList $as List).add(toString(id));
 	return identifier(i);
 }
 
@@ -157,7 +157,7 @@ void init_list(void)
 {
 	if(!idList)
 	{
-		idList = new Object(List.class);
+		idList = new(List.class);
 	}
 }
 
@@ -167,10 +167,10 @@ void delete_list(void)
 	{
 		pointer p;
 		
-		while($(List)->size(idList))
+		while($(idList $as List).size())
 		{
-			p = $(List)->get(idList, 0);
-			$(List)->remove(idList, 0);
+			p = $(idList $as List).get(0);
+			$(idList $as List).remove(0);
 			Memory.free(p);
 		}
 		
@@ -218,7 +218,7 @@ static Token nextToken(void)
 	if(*p_prog == 0)
 	{
 		ret.type = tok_eof;
-		ret.value = new Char(0);
+		ret.value = New.Char(0);
 		return ret;
 	}
 	
@@ -238,7 +238,7 @@ static Token nextToken(void)
 	{
 		++ p_prog;
 		ret.type = tok_character;
-		ret.value = new Char(character());
+		ret.value = New.Char(character());
 		++ p_prog;
 		if(*p_prog != '\'')
 			fprintf(stderr, "\t-> Erro: Esperado aspas simples(\"'\") após \"%c\"\n", *ret.value);
@@ -567,7 +567,7 @@ static Token nextToken(void)
 		}
 		v[i] = 0;
 		++ p_prog;
-		ret.value = Tonight.ASCII.normalizeString(toString(v));
+		ret.value = toString(v);
 		Array.free(v);
 		return ret;
 	}

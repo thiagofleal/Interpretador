@@ -13,7 +13,7 @@ extern bool token_expected(int, string);
 extern int arguments(void);
 extern unsigned int intern_identifier(string);
 extern Result expression(void);
-extern Class * find_class(unsigned int);
+extern strClass * find_class(unsigned int);
 extern Attribute * find_attr(p_Object*, unsigned int);
 extern Method * find_met(p_Object*, unsigned int);
 
@@ -209,11 +209,11 @@ bool methods_Arquivo(Result * r, int _meth_id)
 				break;
 		}
 		
-		fputs(s, file);
+		fputs(s, (FILE*)file);
 		
 		if(_meth_id == method(escreverLinha))
 		{
-			fputc('\n', file);
+			fputc('\n', (FILE*)file);
 		}
 		
 		r->type = type_void;
@@ -225,33 +225,33 @@ bool methods_Arquivo(Result * r, int _meth_id)
 	{
 		expected_arguments(0, 0);
 		r->type = type_bool;
-		r->value.rt_bool = fflush(file) ? true : false;
+		r->value.rt_bool = fflush((FILE*)file) ? true : false;
 	}
 	else if(_meth_id == method(reiniciar))
 	{
 		expected_arguments(0, 0);
 		r->type = type_void;
 		r->value.rt_pointer = NULL;
-		rewind(file);
+		File.rewind(file);
 	}
 	else if(_meth_id == method(fim))
 	{
 		expected_arguments(0, 0);
 		r->type = type_bool;
-		r->value.rt_bool = feof(file) ? true : false;
+		r->value.rt_bool = File.end(file) ? true : false;
 	}
 	else if(_meth_id == method(fechar))
 	{
 		expected_arguments(0, 0);
 		r->type = type_bool;
-		r->value.rt_bool = fclose(file) ? true : false;
+		r->value.rt_bool = fclose((FILE*)file) ? true : false;
 	}
 	else if(_meth_id == method(caractere))
 	{
 		char c;
 		
 		expected_arguments(0, 0);
-		fscanf(file, "%c", &c);
+		fscanf((FILE*)file, "%c", &c);
 		r->type = type_char;
 		r->value.rt_double = (double)c;
 	}
@@ -260,7 +260,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		int i;
 		
 		expected_arguments(0, 0);
-		fscanf(file, "%i", &i);
+		fscanf((FILE*)file, "%i", &i);
 		r->type = type_real;
 		r->value.rt_double = (double)i;
 	}
@@ -269,7 +269,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		double d;
 		
 		expected_arguments(0, 0);
-		fscanf(file, "%lf", &d);
+		fscanf((FILE*)file, "%lf", &d);
 		r->type = type_real;
 		r->value.rt_double = d;
 	}
@@ -278,7 +278,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		char s[301];
 		
 		expected_arguments(0, 0);
-		fscanf(file, "%s", s);
+		fscanf((FILE*)file, "%s", s);
 		r->type = type_string;
 		r->value.rt_String = toString(s);
 	}
@@ -287,7 +287,7 @@ bool methods_Arquivo(Result * r, int _meth_id)
 		char s[1001];
 		
 		expected_arguments(0, 0);
-		fscanf(file, " %[^\n]s", s);
+		fscanf((FILE*)file, " %[^\n]s", s);
 		r->type = type_string;
 		r->value.rt_String = toString(s);
 	}

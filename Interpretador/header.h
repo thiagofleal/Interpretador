@@ -228,10 +228,10 @@ typedef struct str_class{
 	int n_met;
 	Attribute attr[num_attr];
 	Method met[num_meth];
-}Class;
+}strClass;
 
 typedef struct _str_Object{
-	Class * p_class;
+	strClass * p_class;
 	struct _str_Object * base_object;
 	Attribute * attr;
 }str_Object, *p_Object;

@@ -4,7 +4,7 @@ extern int ind_var, ind_func, ind_arg, ind_class, access;
 
 extern Variable _var[];
 extern Function _func[];
-extern Class _class[];
+extern strClass _class[];
 
 Variable * find_var(unsigned int id)
 {
@@ -28,7 +28,7 @@ Function * find_func(unsigned int id)
 	return NULL;
 }
 
-Class * find_class(unsigned int id)
+strClass * find_class(unsigned int id)
 {
 	register int i;
 	
@@ -62,7 +62,7 @@ Attribute * find_attr(p_Object * p_obj, unsigned int id)
 Method * find_met(p_Object * p_obj, unsigned int id)
 {
 	register int i;
-	Class * p_class;
+	strClass * p_class;
 	
 	if(!*p_obj)
 	{

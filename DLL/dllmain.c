@@ -55,7 +55,7 @@ Result func2(Result *_arg, int numArgs)
 	static Result ret;
 	static Painter paint;
 	
-	paint = new Painter(Tonight.Resources.Color);
+	paint = New.Painter(Tonight.Resources.Color);
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
@@ -126,7 +126,7 @@ Result func8(Result *_arg, int numArgs)
 	double arg2 = _arg[1].value.rt_double;
 	int arg3 = (int)_arg[2].value.rt_double;
 	
-	rand = new Random(Tonight.Std.Random.Range);
+	rand = New.Random(Tonight.Std.Random.Range);
 	
 	ret.type = type_real;
 	ret.value.rt_double = rand.nextDouble(arg1, arg2, arg3);
@@ -229,19 +229,19 @@ DLLIMPORT void set_error_function(P_void function)
 
 DLLIMPORT void add_std_func(object list)
 {
-	$(List) -> add(list, func0);
-	$(List) -> add(list, func1);
-	$(List) -> add(list, func2);
-	$(List) -> add(list, func3);
-	$(List) -> add(list, func4);
-	$(List) -> add(list, func5);
-	$(List) -> add(list, func6);
-	$(List) -> add(list, func7);
-	$(List) -> add(list, func8);
-	$(List) -> add(list, func9);
-	$(List) -> add(list, func10);
-	$(List) -> add(list, func11);
-	$(List) -> add(list, func12);
-	$(List) -> add(list, func13);
-	$(List) -> add(list, func14);
+	$(list $as List).add(func0);
+	$(list $as List).add(func1);
+	$(list $as List).add(func2);
+	$(list $as List).add(func3);
+	$(list $as List).add(func4);
+	$(list $as List).add(func5);
+	$(list $as List).add(func6);
+	$(list $as List).add(func7);
+	$(list $as List).add(func8);
+	$(list $as List).add(func9);
+	$(list $as List).add(func10);
+	$(list $as List).add(func11);
+	$(list $as List).add(func12);
+	$(list $as List).add(func13);
+	$(list $as List).add(func14);
 }
