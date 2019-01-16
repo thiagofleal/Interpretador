@@ -4,7 +4,7 @@
 #		include <Tonight\list.h>
 #	endif
 #	ifdef INCLUDE_STD_FUNC
-#		include "..\DLL\add_std_func.h"
+#		include "..\Shared\add_std_func.h"
 #	endif
 #	define	interpreter_name	"Interpretador\\Interpretador.exe"
 #	define	library_folder	"Bibliotecas\\"
@@ -14,7 +14,7 @@
 #		include <Tonight/list.h>
 #	endif
 #	ifdef INCLUDE_STD_FUNC
-#		include "../SO/add_std_func.h"
+#		include "../Shared/add_std_func.h"
 #	endif
 #	define	interpreter_name	"Interpretador/Interpretador"
 #	define	library_folder	"Bibliotecas/"
