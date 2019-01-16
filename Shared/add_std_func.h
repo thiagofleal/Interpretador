@@ -12,6 +12,6 @@
 #	endif
 
 	SHARED void set_error_function(P_void function);
-	SHARED void add_std_func(object);
+	SHARED pointer add_std_func(void);
 
 #endif

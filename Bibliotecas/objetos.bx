@@ -116,7 +116,7 @@ Objeto: Tecla = novo Classe{
 	
 	// SO: Linux (fim)
 	*/
-	/*
+	
 	// SO: Windows (início)
 	// Descomente este trecho se seu sistema operacional for Windows
 	
@@ -181,7 +181,7 @@ Objeto: Tecla = novo Classe{
 	{retornar: 295;}
 	
 	// SO: Windows (Fim)
-	*/
+	
 }();
 
 /**

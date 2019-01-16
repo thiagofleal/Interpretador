@@ -227,8 +227,11 @@ SHARED void set_error_function(P_void function)
 	error_found = function;
 }
 
-SHARED void add_std_func(object list)
+SHARED pointer add_std_func(void)
 {
+	object list = new(List.class);
+	pointer ret = NULL;
+	
 	$(list $as List).add(func0);
 	$(list $as List).add(func1);
 	$(list $as List).add(func2);
@@ -244,4 +247,8 @@ SHARED void add_std_func(object list)
 	$(list $as List).add(func12);
 	$(list $as List).add(func13);
 	$(list $as List).add(func14);
+	
+	ret = $(list $as List).toArray();
+	delete(list);
+	return ret;
 }
