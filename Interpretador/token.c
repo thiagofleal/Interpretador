@@ -9,7 +9,7 @@ static char *p_prog, *begin;
 static string _file;
 static object idList = NULL;
 
-static u_char character(void)
+static uchar character(void)
 {
 	if(*p_prog == '\\')
 	{
@@ -38,7 +38,7 @@ static u_char character(void)
 			case '8':
 			case '9':
 			{
-				u_char c = (char)strtol(p_prog, &p_prog, 10);
+				uchar c = (uchar)strtol(p_prog, &p_prog, 10);
 				-- p_prog;
 				return c;
 			}

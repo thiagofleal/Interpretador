@@ -79,6 +79,7 @@ bool token_expected(int type, string value)
 			"identificador",
 			"fim de arquivo"
 		};
+		
 		string str_err = concat(
 			"Espera-se ", tok_type_name[type],
 			" \"", value, "\" após \"", (token - 1)->value, "\"", $end
@@ -101,7 +102,7 @@ void free_var(Variable * var)
 
 string $throws open_file(string name)
 {
-	Scanner read = New.Scanner(Tonight.Std.File.Input);
+	Scanner read = Scanner(Tonight.Std.File.Input);
 	
 	int num_char = 0;
 	string prog, begin;
@@ -166,7 +167,7 @@ string get_library_path(string argv)
 
 int main(int argc, string argv[])
 {
-	Writer error = New.Writer(Tonight.Std.Error.Output);
+	Writer error = Writer(Tonight.Std.Error.Output);
 	
 	string prog, library;
 	Function * f;
@@ -177,13 +178,6 @@ int main(int argc, string argv[])
 	using(Locale $as Tonight.Locale)
 	{
 		Locale.setName("");
-		Locale.setCategory(Locale.Category.Collate);
-		Locale.set();
-		Locale.setCategory(Locale.Category.Monetary);
-		Locale.set();
-		Locale.setCategory(Locale.Category.Numeric);
-		Locale.set();
-		Locale.setCategory(Locale.Category.Time);
 		Locale.set();
 	}
 	
@@ -284,7 +278,7 @@ int main(int argc, string argv[])
 	catch(GenericException)
 	{
 		Exception e = getException();
-		string err = concat("Erro inesperado: ", Error(e), "\nMensagem de erro: ",Message(e), $end);
+		string err = concat("Erro inesperado: ", Error(e), "\nMensagem de erro: ", Message(e), $end);
 		
 		error.textln(err);
 		String.free(err);

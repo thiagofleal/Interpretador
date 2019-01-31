@@ -318,7 +318,7 @@ bool methods_Texto(Result * r, int _meth_id)
 		
 		if(ind >= 0 && ind < strlen(str))
 		{
-			r->value.rt_double = (double)((u_char)str[ind]);
+			r->value.rt_double = (double)((uchar)str[ind]);
 		}
 		else
 		{

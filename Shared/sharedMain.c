@@ -55,7 +55,7 @@ Result func2(Result *_arg, int numArgs)
 	static Result ret;
 	static Painter paint;
 	
-	paint = New.Painter(Tonight.Resources.Color);
+	paint = Painter(Tonight.Resources.Color);
 	
 	ret.type = type_void;
 	ret.value.rt_pointer = NULL;
@@ -126,7 +126,7 @@ Result func8(Result *_arg, int numArgs)
 	double arg2 = _arg[1].value.rt_double;
 	int arg3 = (int)_arg[2].value.rt_double;
 	
-	rand = New.Random(Tonight.Std.Random.Range);
+	rand = Random(Tonight.Std.Random.Range);
 	
 	ret.type = type_real;
 	ret.value.rt_double = rand.nextDouble(arg1, arg2, arg3);
@@ -229,8 +229,8 @@ SHARED void set_error_function(P_void function)
 
 SHARED pointer add_std_func(void)
 {
+	pointer ret;
 	object list = new(List.class);
-	pointer ret = NULL;
 	
 	$(list $as List).add(func0);
 	$(list $as List).add(func1);

@@ -11,7 +11,7 @@
 #		define SHARED
 #	endif
 
-	SHARED void set_error_function(P_void function);
+	SHARED void set_error_function(P_void);
 	SHARED pointer add_std_func(void);
 
 #endif

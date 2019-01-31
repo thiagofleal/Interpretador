@@ -118,7 +118,6 @@ enum result_type{
 };
 
 enum enum_operator{
-	
 	op_attr = int_operator,
 	op_incr,
 	op_decr,
@@ -160,7 +159,6 @@ enum enum_operator{
 	op_colch_close,
 	
 	op_at
-	
 };
 
 typedef struct _str_matrix{
